@@ -15,9 +15,9 @@ export default function BtnTextChange () {
   }
 
   
-  let btn = document.getElementById('btn');
-
+  
   function changeBtn2() {
+    let btn = document.getElementById('btn');
     btn.innerText = '반갑습니다'
   }
 
