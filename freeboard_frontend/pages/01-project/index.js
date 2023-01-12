@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useMutation, gql } from '@apollo/client'
 
 import {
   Container,
@@ -35,68 +36,104 @@ import {
   TextError
 } from '../../styles/01-project-style'
 
+const GraphqlCreateBoard = gql`
+  mutation createMyBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`
+
 export default function 게시물등록(){
+
+  const [ mutation ] = useMutation(GraphqlCreateBoard)
   
-  const [name, setName] = useState('')
+  const [writer, setWriter] = useState('')
   const [password, setPassword] = useState('')
   const [title, setTitle] = useState('')
-  const [text, setText] = useState('')
+  const [contents, setContents] = useState('')
 
-  const [nameErr, setNameErr] = useState('')
+  const [writerErr, setWriterErr] = useState('')
   const [passwordErr, setPasswordErr] = useState('')
   const [titleErr, setTitleErr] = useState('')
-  const [textErr, setTextErr] = useState('')
+  const [contentsErr, setContentsErr] = useState('')
+
+  
 
   function onChangeName(event) {
-    setName(event.target.value)
+    setWriter(event.target.value)
+    setWriterErr("")
   }
 
   function onChangePassword(event) {
     setPassword(event.target.value)
+    setPasswordErr("")
   }
 
   function onChangeTitle(event) {
     setTitle(event.target.value)
+    setTitleErr("")
   }
 
   function onChangeText(event) {
-    setText(event.target.value)
+    setContents(event.target.value)
+    setContentsErr("")
   }
 
-  function onClickBtn(event) {
+  const createBoardPush = async () => {
+    const result = await mutation({
+      variables: {
+        createBoardInput: {
+          writer: writer,
+          password: password,
+          title: title,
+          contents: contents
+        }
+      }
+    })
+    console.log(result)
+    alert("게시글이 등록되었습니다.")
+  }
 
-    let final = true
+  const onClickBtn = () => {
 
-    if(name === '') {
-      setNameErr('* 이름을 입력해주세요')
-      final = false
+
+    // let final = true
+
+    if(!writer) {
+      setWriterErr('* 이름을 입력해주세요')
+      // final = false
     } else {
-      setNameErr('')
+      setWriterErr('')
     }
 
-    if(password === '') {
+    if(!password) {
       setPasswordErr('* 비밀번호를 입력해주세요')
-      final = false
+      // final = false
     } else {
       setPassword('')
     }
 
-    if(title === '') {
+    if(!title) {
       setTitleErr('* 제목을 입력해주세요')
-      final = false
+      // final = false
     } else {
       setTitleErr('')
     }
 
-    if(text === '') {
-      setTextErr('* 내용을 입력해주세요')
-      final = false
+    if(!contents) {
+      setContentsErr('* 내용을 입력해주세요')
+      // final = false
     } else {
-      setTextErr('')
+      setContentsErr('')
     }
 
-    if(final === true) {
-      alert('등록이 완료되었습니다')
+    if(writer && password && title && contents) {
+      createBoardPush()
+      // alert('등록이 완료되었습니다')
     }
 
   }
@@ -109,7 +146,7 @@ export default function 게시물등록(){
           <Section1_Left>
             <InputTitleBox>
               <InputNameTitle>작성자</InputNameTitle>
-              <TextError>{nameErr}</TextError>
+              <TextError>{writerErr}</TextError>
             </InputTitleBox>
             <Input placeholder='이름을 적어주세요.' onChange={onChangeName}/>
           </Section1_Left>
@@ -133,7 +170,7 @@ export default function 게시물등록(){
         <Section3>
           <InputTitleBox>
             <InputTitle>내용</InputTitle>
-            <TextError>{textErr}</TextError>
+            <TextError>{contentsErr}</TextError>
           </InputTitleBox>
           <Section3_Input placeholder='내용을 작성해주세요.' onChange={onChangeText}/>
         </Section3>

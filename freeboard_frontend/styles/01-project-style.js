@@ -6,7 +6,6 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 `
 
 export const Wrapper = styled.div`
