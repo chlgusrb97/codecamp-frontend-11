@@ -1,7 +1,7 @@
 import { useMutation,gql } from '@apollo/client'
 import { useState } from 'react'
 
-const MyGraphqlSetting = gql`
+const CREATE_BOARD = gql`
   mutation createProduct($seller: String, $createProductInput: CreateProductInput!){
     createProduct(seller: $seller, createProductInput: $createProductInput) {
       _id
@@ -13,7 +13,7 @@ const MyGraphqlSetting = gql`
 
 export default function GraphqlApi() {
 
-  const [ mutation ] = useMutation(MyGraphqlSetting);
+  const [ createBoard ] = useMutation(CREATE_BOARD);
   
   const [seller, setSeller] = useState()
   const [name, setName] = useState()
@@ -21,7 +21,7 @@ export default function GraphqlApi() {
   const [price, setPrice] = useState()
 
   const onClickBtn = async () => {
-    const result = await mutation({
+    const result = await createBoard({
       variables: {
         seller: seller,
         createProductInput: {
