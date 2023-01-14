@@ -89,6 +89,7 @@ export const Section3_Input = styled.textarea`
   margin-top: 16px;
   margin-bottom: 16px;
   height: 480px;
+  resize: none;
 `
 
 export const Section4 = styled.div`

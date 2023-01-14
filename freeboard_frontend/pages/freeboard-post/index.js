@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useMutation, gql } from '@apollo/client'
+import { useRouter } from 'next/router'
 
 import {
   Container,
@@ -34,9 +35,9 @@ import {
   SubmitBtn,
   InputTitleBox,
   TextError
-} from '../../styles/01-project-style'
+} from '../../styles/freeboard-post'
 
-const GraphqlCreateBoard = gql`
+const CREATE_BOARD = gql`
   mutation createMyBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
       _id
@@ -47,9 +48,11 @@ const GraphqlCreateBoard = gql`
   }
 `
 
-export default function 게시물등록(){
+export default function FreeboardPost(){
 
-  const [ mutation ] = useMutation(GraphqlCreateBoard)
+  const router = useRouter()
+
+  const [ createBoard ] = useMutation(CREATE_BOARD)
   
   const [writer, setWriter] = useState('')
   const [password, setPassword] = useState('')
@@ -60,8 +63,6 @@ export default function 게시물등록(){
   const [passwordErr, setPasswordErr] = useState('')
   const [titleErr, setTitleErr] = useState('')
   const [contentsErr, setContentsErr] = useState('')
-
-  
 
   function onChangeName(event) {
     setWriter(event.target.value)
@@ -84,56 +85,57 @@ export default function 게시물등록(){
   }
 
   const createBoardPush = async () => {
-    const result = await mutation({
-      variables: {
-        createBoardInput: {
-          writer: writer,
-          password: password,
-          title: title,
-          contents: contents
+
+    try {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: writer,
+            password: password,
+            title: title,
+            contents: contents
+          }
         }
-      }
-    })
-    console.log(result)
+      })
+      console.log(result);
+      console.log(result.data)
+      router.push(`freeboard-post-moved/${result.data.createBoard._id}`)
+
+    } catch(error) {
+      alert(error.message)
+    }
     alert("게시글이 등록되었습니다.")
   }
 
   const onClickBtn = () => {
 
 
-    // let final = true
-
     if(!writer) {
       setWriterErr('* 이름을 입력해주세요')
-      // final = false
     } else {
       setWriterErr('')
     }
 
     if(!password) {
       setPasswordErr('* 비밀번호를 입력해주세요')
-      // final = false
     } else {
       setPassword('')
     }
 
     if(!title) {
       setTitleErr('* 제목을 입력해주세요')
-      // final = false
     } else {
       setTitleErr('')
     }
 
     if(!contents) {
       setContentsErr('* 내용을 입력해주세요')
-      // final = false
     } else {
       setContentsErr('')
     }
 
     if(writer && password && title && contents) {
       createBoardPush()
-      // alert('등록이 완료되었습니다')
     }
 
   }
