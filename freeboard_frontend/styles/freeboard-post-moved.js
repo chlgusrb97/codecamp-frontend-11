@@ -130,6 +130,7 @@ export const Section02_ContentsUpDownBox_Up = styled.li`
 
 export const ContentsUpDownBox_Up_img = styled.img`
   cursor: pointer;
+  margin-bottom: 4px;
 `
 
 export const ContentsUpDownBox_Up_count = styled.span`
@@ -150,6 +151,7 @@ export const ContentsUpDownBox_Down_img = styled.img`
   width: 20px;
   height: 100%;
   cursor: pointer;
+  margin-bottom: 4px;
 `
 
 export const ContentsUpDownBox_Down_count = styled.span`
