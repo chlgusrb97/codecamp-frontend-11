@@ -20,7 +20,7 @@ export default function randomNumber() {
     <div>
       {/* <div id='target'>000000</div>
       <button onClick={random}>인증번호 전송</button> */}
-
+      
       <div>{random}</div>
       <button onClick={randomNum}>인증번호 전송</button>
     </div>
