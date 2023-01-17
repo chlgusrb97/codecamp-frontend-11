@@ -4,7 +4,9 @@ import { useRouter } from 'next/router'
 import {CREATE_PRODUCT} from './CreateProduct.queries'
 import CreateProductUI from './CreateProduct.presenter';
 
-export default function CreateProductJS() {
+export default function ProductWrite() {
+
+  const [isActive, setIsActive] = useState(false);
   
   const router = useRouter()
   
@@ -20,10 +22,10 @@ export default function CreateProductJS() {
     try {
       const result = await createProduct({
         variables: {
-          seller: seller,
+          seller,
           createProductInput: {
-            name: name,
-            detail: detail,
+            name,
+            detail,
             price: Number(price)
           }
         }
@@ -39,18 +41,34 @@ export default function CreateProductJS() {
 
   const onChangeSeller = (event) => {
     setSeller(event.target.value)
+
+    if(event.target.value && name && detail && price) {
+      setIsActive(true)
+    }
   }
 
   const onChangeName = (event) => {
     setName(event.target.value)
+
+    if(seller && event.target.value && detail && price) {
+      setIsActive(true)
+    }
   }
 
   const onChangeDetail = (event) => {
     setDetail(event.target.value)
+
+    if(seller && name && event.target.value && price) {
+      setIsActive(true)
+    }
   }
 
   const onChangePrice = (event) => {
     setPrice(event.target.value)
+
+    if(seller && name && detail && event.target.value) {
+      setIsActive(true)
+    }
   }
 
   return (
@@ -61,6 +79,7 @@ export default function CreateProductJS() {
         detail = {onChangeDetail}
         price = {onChangePrice}
         createProduct = {onClickCreateProduct}
+        isActive = {isActive}
       />
     </div>
   )
