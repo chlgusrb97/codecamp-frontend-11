@@ -6,14 +6,14 @@
 // phone_number는 길이 4 이상, 20이하인 문자열입니다.
 
 function solution(phone_number) {
-  const answer = '';
+  let answer = '';
   
   let secretNum = phone_number.slice(phone_number.length - 4)
   
   for(let i = 0; i < phone_number.length - 4; i++) {
-    answer += "*" 
+    answer += "*"
   }
-  return answer += secretNum
+  return answer + secretNum
 }
 
 
