@@ -1,5 +1,3 @@
-import { Button } from './CreateProduct.styles'
-
 export default function CreateProductUI(props) {
 
   return (
@@ -8,12 +6,12 @@ export default function CreateProductUI(props) {
       <input type="text" placeholder='상품명' onChange={props.name} />
       <input type="text" placeholder='상품내용' onChange={props.detail} />
       <input type="text" placeholder='상품가격' onChange={props.price} />
-      <Button
-        onClick={props.createProduct}
+      <button
+        onClick={props.isEdit ? props.updateProduct : props.createProduct}
         isActive={props.isActive}
       >
-        상품등록
-      </Button>
+        상품{props.isEdit ? "수정" : "등록"}
+      </button>
     </div>
   )
 

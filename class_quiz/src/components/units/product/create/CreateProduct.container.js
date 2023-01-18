@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
-import {CREATE_PRODUCT} from './CreateProduct.queries'
+import {CREATE_PRODUCT, UPDATE_PRODUCT } from './CreateProduct.queries'
 import CreateProductUI from './CreateProduct.presenter';
 
-export default function ProductWrite() {
+export default function ProductWrite(props) {
 
   const [isActive, setIsActive] = useState(false);
   
   const router = useRouter()
   
   const [ createProduct ] = useMutation(CREATE_PRODUCT);
+  const [ updateProduct ] = useMutation(UPDATE_PRODUCT);
 
   const [seller, setSeller] = useState();
   const [name, setName] = useState();
@@ -30,9 +31,31 @@ export default function ProductWrite() {
           }
         }
       })
+      // console.log(result);
+      // console.log(result.data.createProduct._id)
+      router.push(`/09/products/new-moved/${result.data.createProduct._id}`)
+    } catch(error) {
+      alert(error.message)
+    }
+    console.log()
+  }
+
+  const onClickUpdateProduct = async () => {
+
+    try {
+      const result = await updateProduct({
+        variables: {
+          productId: router.query.ID,
+          updateProductInput: {
+            name,
+            detail,
+            price: Number(price)
+          }
+        }
+      })
       console.log(result);
-      console.log(result.data.createProduct._id)
-      router.push(`/05/boards/routing-moved/${result.data.createProduct._id}`)
+      // console.log(result.data.updateProduct._id)
+      router.push(`/09/products/new-moved/${result.data.updateProduct._id}`)
     } catch(error) {
       alert(error.message)
     }
@@ -79,7 +102,9 @@ export default function ProductWrite() {
         detail = {onChangeDetail}
         price = {onChangePrice}
         createProduct = {onClickCreateProduct}
+        updateProduct = {onClickUpdateProduct}
         isActive = {isActive}
+        isEdit = {props.isEdit}
       />
     </div>
   )

@@ -5,7 +5,7 @@ export default function FetchWriteUI(props) {
 
   return (
     <Fragment>
-      {props.data?.fetchProducts.map((el, index) => (
+      {props.data?.fetchProducts.map((el) => (
       <div key={el._id}>
         <input type="checkbox" />
         <span>{el.seller}</span>

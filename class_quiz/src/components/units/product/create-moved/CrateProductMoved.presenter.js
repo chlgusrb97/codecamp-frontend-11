@@ -5,6 +5,7 @@ export default function NEWMOVEDUI(props) {
       <div>상품명: {props.name}</div>
       <div>상품내용: {props.detail}</div>
       <div>상품가격: {props.price}</div>
+      <button onClick={props.onClickMoved}>수정하기</button>
     </div>
   )
 }

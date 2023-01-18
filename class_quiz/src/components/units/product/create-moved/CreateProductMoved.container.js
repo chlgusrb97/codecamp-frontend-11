@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
+import {FETCH_PRODUCT} from './CrateProductMoved.queries'
 import NEWMOVEDUI from './CrateProductMoved.presenter'
 
 export default function ProductMovedWrite() {
@@ -11,6 +12,12 @@ export default function ProductMovedWrite() {
     variables: { productId: router.query.ID }
   })
 
+  const onClickMoved = () => {
+    router.push(`/09/products/new-moved/${router.query.ID}/edit`)
+  }
+
+  
+
   console.log(data)
 
   return (
@@ -20,6 +27,8 @@ export default function ProductMovedWrite() {
         name={data?.fetchProduct?.name}
         detail={data?.fetchProduct?.detail}
         price={data?.fetchProduct?.price}
+        onClickMoved={onClickMoved}
+        data={data}
       />
     </div>
   )
