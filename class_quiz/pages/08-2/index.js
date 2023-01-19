@@ -1,7 +1,7 @@
 export default function FRUITS() {
   const FRUITS = [
-    { number: 1, title: "레드향" }, // <div>1 레드향</div>
-    { number: 2, title: "샤인머스켓" }, // <div>2 샤인머스켓</div>
+    { number: 1, title: "레드향" },                                             // <div>1 레드향</div>
+    { number: 2, title: "샤인머스켓" },                                         // <div>2 샤인머스켓</div>
     { number: 3, title: "산청딸기" },
     { number: 4, title: "한라봉" },
     { number: 5, title: "사과" },
