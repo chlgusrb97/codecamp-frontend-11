@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "pages/section10/10-02-typescript-boards/new/index.js", "src/components/units/board/09-write2/BoardWrite.container.js", "src/components/units/board/09-write2/BoardWrite.presenter.js", "src/components/units/board/09-write2/BoardWrite.queries.js", "src/components/units/board/09-write2/BoardWrite.styles.js", "src/components/units/board/09-write2/BoardWrite.container.js", "src/components/units/board/10-write/BoardWrite.container.js", "src/components/units/board/10-write/BoardWrite.presenter.js", "src/components/units/board/10-write/BoardWrite.queries.js", "src/components/units/board/10-write/BoardWrite.styles.js"  ],
   "exclude": [
     "node_modules"
   ]

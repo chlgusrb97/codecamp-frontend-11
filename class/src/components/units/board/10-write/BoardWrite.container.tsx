@@ -1,8 +1,9 @@
 import { useMutation } from '@apollo/client'
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import { 나의그래프큐엘셋팅, UPDATE_BOARD } from './BoardWrite.queries'    // export는 골라서 가져오기 가능
 import BoardWriteUI from './BoardWrite.presenter'    // export default로 한개만 가져오기
 import { useRouter } from 'next/router'
+import { IBoardWriteProps, IMyvarables } from './BoardWrite.types'
 // import Sfdsfkjsdfjksdf from './BoardWrite.presenter'     // export default로 이름 바꿔서 가져오기
 // import Sfdsfkjsdfjksdf, { apple } from './BoardWrite.presenter'     // export default와 export를 함께 가져오기
 
@@ -11,7 +12,8 @@ import { useRouter } from 'next/router'
 // S.RedInput                                  // export 한번에 다 가져오기
 
 
-export default function BoardWrite(props) {
+
+export default function BoardWrite(props: IBoardWriteProps) {
 
   const router = useRouter()
 
@@ -33,7 +35,7 @@ export default function BoardWrite(props) {
         }
       })
       console.log(result)
-      router.push(`/section10/10-02-boards/${result.data.createBoard.number}`)
+      router.push(`/section09/09-04-boards/${result.data.createBoard.number}`)
     } catch(error) {
       console.log(error)
     }
@@ -41,7 +43,9 @@ export default function BoardWrite(props) {
   }
 
   const onClickUpdate = async () => {
-    const myvariables = {number : Number(router.query.number)}
+
+    const myvariables: IMyvarables = {number : Number(router.query.number)}
+
     if(writer) myvariables.writer = writer
     if(title) myvariables.title = title
     if(contents) myvariables.contents = contents
@@ -53,36 +57,36 @@ export default function BoardWrite(props) {
       
     })
     console.log(result);
-    router.push(`/section10/10-02-boards/${result.data.updateBoard.number}`)
+    router.push(`/section09/09-04-boards/${result.data.updateBoard.number}`)
     } catch(error) {
       console.log(error)
     }
   }
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value)
   }
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
   }
 
-  const onChangeContents = (event) => {
+  const onChangeContents = (event: ChangeEvent<HTMLInputElement>) => {
     setContents(event.target.value)
   }
 
   return (
     <div>
       <div>$$$$$$$$$$ 여기는 컨테이너입니다. $$$$$$$$$$</div>
-      <BoardWriteUI
-      onClickSubmit={onClickSubmit}
-      onClickUpdate={onClickUpdate}
-      onChangeWriter={onChangeWriter} 
-      onChangeTitle={onChangeTitle} 
-      onChangeContents={onChangeContents}
-      isEdit={props.isEdit}
-      data={props.data} // undefined 이거나, data 이거나 둘 중 하나!
-      />
+        <BoardWriteUI
+        onClickSubmit={onClickSubmit}
+        onClickUpdate={onClickUpdate}
+        onChangeWriter={onChangeWriter} 
+        onChangeTitle={onChangeTitle} 
+        onChangeContents={onChangeContents}
+        isEdit={props.isEdit}
+        data={props.data} // undefined 이거나, data 이거나 둘 중 하나!
+        />
       <div>$$$$$$$$$$ 여기는 컨테이너입니다. $$$$$$$$$$</div>
     </div>
     // props = {
