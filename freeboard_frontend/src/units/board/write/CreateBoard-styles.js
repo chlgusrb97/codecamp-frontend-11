@@ -214,9 +214,9 @@ export const SubmitBtn = styled.button`
   padding: 14px 60px;
   font-size: 16px;
   font-weight: 500;
-  background-color: #ffd600;
   border: none;
   cursor: pointer;
+  background-color: ${(props) => props.isActive ? "#ffd600" : "#bdbdbd"};
 `
 export const InputTitleBox = styled.div`
   display: flex;

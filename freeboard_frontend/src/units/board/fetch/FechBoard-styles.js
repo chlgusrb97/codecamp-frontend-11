@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `
@@ -158,4 +158,20 @@ export const ContentsUpDownBox_Down_count = styled.span`
   font-size: 18px;
   font-weight: 400;
   color: #828282;
+`
+
+export const OnclickButtonUl = styled.ul`
+  display: flex;
+  flex-direction: row;
+  margin: 101px 0 87px 0
+`
+export const OnclickButtonLi = styled.li`
+  list-style: none;
+  border: 1px solid #bdbdbd;
+  padding: 10.5px 60px;
+  cursor: pointer;
+
+  :nth-of-type(2) {
+    margin: 0 24px;
+  }
 `

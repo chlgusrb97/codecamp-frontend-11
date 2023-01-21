@@ -38,21 +38,21 @@ export default function CreateBoardUI(props) {
   return (
     <Container>
       <Wrapper>
-        <HeadTitle>게시물 등록 </HeadTitle>
+        <HeadTitle>게시물 {props.isEdit ? "수정" : "등록"} </HeadTitle>
         <Section1>
           <Section1_Left>
             <InputTitleBox>
               <InputNameTitle>작성자</InputNameTitle>
               <TextError>{props.writerErr}</TextError>
             </InputTitleBox>
-            <Input placeholder='이름을 적어주세요.' onChange={props.writer}/>
+            <Input placeholder='이름을 적어주세요.' onChange={props.writer} defaultValue={props.data?.fetchBoard?.writer} readOnly={props.data?.fetchBoard?.writer} />
           </Section1_Left>
           <Section1_Right>
             <InputTitleBox>
               <InputTitle>비밀번호</InputTitle>
               <TextError>{props.passwordErr}</TextError>
             </InputTitleBox>
-            <Input placeholder='비밀번호를 입력해주세요.' type="password" onChange={props.password}/>
+            <Input placeholder='비밀번호를 입력해주세요.' type="password" onChange={props.password} />
           </Section1_Right>
         </Section1>
 
@@ -61,7 +61,7 @@ export default function CreateBoardUI(props) {
             <InputTitle>제목</InputTitle>
             <TextError>{props.titleErr}</TextError>
           </InputTitleBox>
-          <Input placeholder='제목을 작성해주세요.' onChange={props.title}/>
+          <Input placeholder='제목을 작성해주세요.' onChange={props.title} defaultValue={props.data?.fetchBoard.title} />
         </Section2>
 
         <Section3>
@@ -69,7 +69,7 @@ export default function CreateBoardUI(props) {
             <InputTitle>내용</InputTitle>
             <TextError>{props.contentsErr}</TextError>
           </InputTitleBox>
-          <Section3_Input placeholder='내용을 작성해주세요.' onChange={props.contents}/>
+          <Section3_Input placeholder='내용을 작성해주세요.' onChange={props.contents} defaultValue={props.data?.fetchBoard.contents} />
         </Section3>
 
         <Section4>
@@ -119,7 +119,12 @@ export default function CreateBoardUI(props) {
           </Section7_SettingBox>
         </Section7>
 
-        <SubmitBtn onClick={props.onClickBtn}>등록하기</SubmitBtn>
+        <SubmitBtn 
+          onClick={props.isEdit ? props.onClickUpdate : props.onClickBtn}
+          isActive={props.isEdit ? !(props.isActive) : props.isActive  }
+        >
+          {props.isEdit ? "수정" : "등록"}하기
+        </SubmitBtn>
       </Wrapper>
     </Container>
   )

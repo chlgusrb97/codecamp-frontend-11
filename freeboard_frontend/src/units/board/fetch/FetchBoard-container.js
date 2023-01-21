@@ -1,30 +1,31 @@
-import { useQuery } from '@apollo/client'
-import { FETCH_BOARD } from './FetchBoard-queries'
+import { useMutation, useQuery } from '@apollo/client'
+import { FETCH_BOARD, DELETE_BOARD } from './FetchBoard-queries'
 import { useRouter } from 'next/router'
 import FetchBoardUI from './FetchBoard-presenter'
-// import { useState } from 'react'
 
 export default function BoardFetch() {
 
   const router = useRouter()
-  console.log(router)
-
-  // const [ likeCount, setLikeCount ] = useState(0)
-  // const [ disLikeCount, setDisLikeCount ] = useState(0)
+  
+  const [ deleteBoard ] = useMutation(DELETE_BOARD)
 
   const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.number }
+    variables: { boardId: router.query.ID }
   })
   
-  console.log(data)
-  
-  // function onClickLikeUp() {
-  //   setLikeCount(likeCount + 1)
-  // }
+  const onClickEditBtn = async () => {
+    router.push(`/boards/freeboard-post-moved/${router.query.ID}/edit`)
+  }
 
-  // function onClickDislikeUp() {
-  //   setDisLikeCount(disLikeCount + 1)
-  // }
+  const onClickDeleteBtn = async () => {
+    console.log(router)
+    await deleteBoard({
+      variables: {
+          boardId: router.query.ID
+      }
+    })
+    router.push(`/boards`)
+  }
 
   return (
     <FetchBoardUI 
@@ -32,6 +33,8 @@ export default function BoardFetch() {
       fetchDate = {data?.fetchBoard?.createdAt}
       fetchTitle = {data?.fetchBoard?.title}
       fetchContents = {data?.fetchBoard?.contents}
+      onClickEditBtn = {onClickEditBtn}
+      onClickDeleteBtn= {onClickDeleteBtn}
     />
   )
 
