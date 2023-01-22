@@ -13,8 +13,12 @@ export default function BoardFetch() {
     variables: { boardId: router.query.ID }
   })
   
-  const onClickEditBtn = async () => {
+  const onClickEditBtn = () => {
     router.push(`/boards/freeboard-post-moved/${router.query.ID}/edit`)
+  }
+
+  const onClickListBoard = () => {
+    router.push(`/boards`)
   }
 
   const onClickDeleteBtn = async () => {
@@ -34,7 +38,8 @@ export default function BoardFetch() {
       fetchTitle = {data?.fetchBoard?.title}
       fetchContents = {data?.fetchBoard?.contents}
       onClickEditBtn = {onClickEditBtn}
-      onClickDeleteBtn= {onClickDeleteBtn}
+      onClickDeleteBtn = {onClickDeleteBtn}
+      onClickListBoard = {onClickListBoard}
     />
   )
 

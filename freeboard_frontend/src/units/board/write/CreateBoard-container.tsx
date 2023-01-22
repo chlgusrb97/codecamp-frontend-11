@@ -1,10 +1,24 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { CREATE_BOARD, UPDATE_BOARD } from './CreateBoard-queries'
 import CreateBoardUI from './CreateBoard-presenter'
 
-export default function BoardWrite(props) {
+interface IBoardWrite {
+  isEdit: boolean
+  data?: any
+}
+
+interface Imyvariables {
+  boardId: any
+  password: string
+  updateBoardInput: {
+    title?: string
+    contents?: string
+  }
+}
+
+export default function BoardWrite(props: IBoardWrite) {
 
   const router = useRouter()
 
@@ -40,7 +54,7 @@ export default function BoardWrite(props) {
       // console.log(result.data)
       router.push(`/boards/freeboard-post-moved/${result.data.createBoard._id}`)
 
-    } catch(error) {
+    } catch(error: any) {
       alert(error.message)
     }
     alert("게시글이 등록되었습니다.")
@@ -48,12 +62,10 @@ export default function BoardWrite(props) {
 // console.log(router)
   const onClickUpdate = async () => {
     
-    const myvariables = { 
+    const myvariables: Imyvariables = { 
       boardId: router.query.ID,
       password,
-      updateBoardInput:{
-        
-      }
+      updateBoardInput: {}
     }
     if(title) myvariables.updateBoardInput.title = title
     if(contents) myvariables.updateBoardInput.contents = contents
@@ -66,7 +78,7 @@ export default function BoardWrite(props) {
     router.push(`/boards/freeboard-post-moved/${result2.data.updateBoard._id}`)
   }
 
-  function onChangeName(event) {
+  function onChangeName(event: ChangeEvent<HTMLInputElement>) {
     setWriter(event.target.value)
 
     if(event.target.value) {
@@ -82,7 +94,7 @@ export default function BoardWrite(props) {
     }
   }
 
-  function onChangePassword(event) {
+  function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
     setPassword(event.target.value)
 
     if(event.target.value) {
@@ -98,7 +110,7 @@ export default function BoardWrite(props) {
     }
   }
 
-  function onChangeTitle(event) {
+  function onChangeTitle(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value)
 
     if(event.target.value) {
@@ -114,7 +126,7 @@ export default function BoardWrite(props) {
     }
   }
 
-  function onChangeText(event) {
+  function onChangeText(event: ChangeEvent<HTMLTextAreaElement>) {
     setContents(event.target.value)
 
     if(event.target.value) {

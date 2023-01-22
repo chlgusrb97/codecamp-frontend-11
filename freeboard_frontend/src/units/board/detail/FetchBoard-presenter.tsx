@@ -32,7 +32,17 @@ import {
 
 } from './FechBoard-styles'
 
-export default function FetchBoardUI(props) {
+interface IFetchBoardUI {
+  fetchWriter: string
+  fetchDate: string
+  fetchTitle: string
+  fetchContents: string
+  onClickEditBtn: () => void
+  onClickDeleteBtn: () => Promise<void>
+  onClickListBoard: () => void
+}
+
+export default function FetchBoardUI(props: IFetchBoardUI) {
 
   return (
     <Container>
@@ -75,7 +85,7 @@ export default function FetchBoardUI(props) {
         </Section02>
       </Wrapper>
       <OnclickButtonUl>
-        <OnclickButtonLi>목록으로</OnclickButtonLi>
+        <OnclickButtonLi onClick={props.onClickListBoard}>목록으로</OnclickButtonLi>
         <OnclickButtonLi onClick={props.onClickEditBtn}>수정하기</OnclickButtonLi>
         <OnclickButtonLi onClick={props.onClickDeleteBtn}>삭제하기</OnclickButtonLi>
       </OnclickButtonUl>

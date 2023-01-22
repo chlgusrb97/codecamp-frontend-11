@@ -33,7 +33,25 @@ import {
   TextError
 } from './CreateBoard-styles'
 
-export default function CreateBoardUI(props) {
+import React,{ ChangeEvent, MouseEvent } from 'react'
+
+interface ICreateBoardUI {
+  writer: (event: ChangeEvent<HTMLInputElement>) => void
+  password: (event: ChangeEvent<HTMLInputElement>) => void
+  title: (event: ChangeEvent<HTMLInputElement>) => void
+  contents: (event: ChangeEvent<HTMLTextAreaElement>) => void
+  writerErr: string
+  passwordErr: string
+  titleErr: string
+  contentsErr: string
+  onClickBtn: (event: MouseEvent<HTMLButtonElement>) => void
+  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void
+  isActive: boolean
+  isEdit: boolean
+  data?: any
+}
+
+export default function CreateBoardUI(props: ICreateBoardUI) {
 
   return (
     <Container>
@@ -45,7 +63,10 @@ export default function CreateBoardUI(props) {
               <InputNameTitle>작성자</InputNameTitle>
               <TextError>{props.writerErr}</TextError>
             </InputTitleBox>
-            <Input placeholder='이름을 적어주세요.' onChange={props.writer} defaultValue={props.data?.fetchBoard?.writer} readOnly={props.data?.fetchBoard?.writer} />
+            <Input placeholder='이름을 적어주세요.' 
+              onChange={props.writer} 
+              defaultValue={props.data?.fetchBoard?.writer} 
+              readOnly={props.data?.fetchBoard?.writer} />
           </Section1_Left>
           <Section1_Right>
             <InputTitleBox>
@@ -121,7 +142,7 @@ export default function CreateBoardUI(props) {
 
         <SubmitBtn 
           onClick={props.isEdit ? props.onClickUpdate : props.onClickBtn}
-          isActive={props.isEdit ? !(props.isActive) : props.isActive  }
+          isActive={props.isEdit ? !(props.isActive) : props.isActive}
         >
           {props.isEdit ? "수정" : "등록"}하기
         </SubmitBtn>

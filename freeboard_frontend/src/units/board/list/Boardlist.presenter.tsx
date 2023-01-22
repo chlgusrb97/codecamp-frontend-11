@@ -1,6 +1,12 @@
 import { Fragment } from 'react'
 
-export default function BoardListUI(props) {
+interface IBoardListUI {
+  data?: any
+  onClickCreateBoard: () => void
+}
+
+export default function BoardListUI(props: IBoardListUI) {
+  
   return (
     <Fragment>
       <table>
@@ -13,7 +19,7 @@ export default function BoardListUI(props) {
           </tr>
         </thead>
         
-        {props.data?.fetchBoards.map((el) => (
+        {props.data?.fetchBoards.map((el: any) => (
           <tbody key={el._id}>
             <tr>
               <td>1</td>
