@@ -128,6 +128,7 @@ export const ConmmentSection2 = styled.div`
   justify-content: space-between;
   background-color: #fff;
   border-bottom: 1px solid #bdbdbd;
+  margin-bottom: 20px;
 `
 export const ConmmentSection2_Usericon = styled.img`
   width: 40px;
