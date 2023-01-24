@@ -51,7 +51,7 @@ export const ConmmentSection1_Contents_1 = styled.div`
   margin: 40px 0 20px;
 `
 export const ConmmentSection1_Contents_1_Input = styled.input`
-  width: 180px;
+  width: 158px;
   padding: 14px 0 14px 20px;
   margin-right: 14px;
   border: 1px solid #bdbdbd;

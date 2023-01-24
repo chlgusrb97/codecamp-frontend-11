@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import exp from 'constants';
 
 export const CREATE_COMMENT = gql`
   mutation createBoardComment(
@@ -29,5 +30,11 @@ export const FETCH_COMMENT = gql`
       contents
       createdAt
     }
+  }
+`
+
+export const DELETE_COMMENT = gql`
+  mutation deleteBoardComment($boardCommentId: ID!) {
+    deleteBoardComment(boardCommentId: $boardCommentId) 
   }
 `

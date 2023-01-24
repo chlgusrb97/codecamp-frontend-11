@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 1200px;
-  padding: 60px 103px 100px 101px;
+  padding: 60px 102px 100px 102px;
   background-color: #fff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 `
@@ -57,7 +57,7 @@ export const Input = styled.input`
   background-color: #fff;
   margin: 0;
   padding: 0;
-  padding: 14px 0 14px 16px;
+  padding: 14px 16px;
   margin-top: 16px;
   margin-bottom: 40px;
 `
@@ -84,7 +84,7 @@ export const Section3 = styled.div`
 export const Section3_Input = styled.textarea`
   border: 1px solid #bdbdbd;
   background-color: #fff;
-  padding: 14px 0 14px 16px;
+  padding: 14px 16px;
   margin-top: 16px;
   margin-bottom: 16px;
   height: 480px;
@@ -128,13 +128,13 @@ export const AddressBox_Btn = styled.button`
 export const Section4_Input1 = styled.input`
 border: 1px solid #bdbdbd;
 background-color: #fff;
-padding: 14px 0 14px 16px;
+padding: 14px 16px;
 `
 
 export const Section4_Input2 = styled.input`
 border: 1px solid #bdbdbd;
 background-color: #fff;
-padding: 14px 0 14px 16px;
+padding: 14px 16px;
 margin-top: 30px;
 margin-bottom: 37px;
 `

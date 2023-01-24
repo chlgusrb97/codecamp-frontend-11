@@ -88,7 +88,7 @@ export default function BoardFetchCommentUI(props: any) {
           <ConmmentSection2_Contents_Iconbox>
             <ConmmentSection2_Contents_Iconbox_edit src='/img/edit.png' />
             <ConmmentSection2_Contents_Iconbox_delete src='/img/delete.png'
-              
+              onClick={props.deleteBoardCommentBtn}
             />
           </ConmmentSection2_Contents_Iconbox>
         </ConmmentSection2>
