@@ -1,44 +1,43 @@
-import { ChangeEvent, useState } from 'react'
-import { useMutation } from '@apollo/client'
-import { useRouter } from 'next/router'
-import { CREATE_BOARD, UPDATE_BOARD } from './CreateBoard-queries'
-import CreateBoardUI from './CreateBoard-presenter'
+import { ChangeEvent, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import { CREATE_BOARD, UPDATE_BOARD } from "./CreateBoard-queries";
+import CreateBoardUI from "./CreateBoard-presenter";
+import { IMutation, IQuery } from "../../../commons/types/generated/types";
 
 interface IBoardWrite {
-  isEdit: boolean
-  data?: any
+  isEdit: boolean;
+  data?: Pick<IQuery, "fetchBoard">;
 }
 
 interface Imyvariables {
-  boardId: any
-  password: string
+  boardId: any;
+  password: string;
   updateBoardInput: {
-    title?: string
-    contents?: string
-  }
+    title?: string;
+    contents?: string;
+  };
 }
 
 export default function BoardWrite(props: IBoardWrite) {
+  const router = useRouter();
 
-  const router = useRouter()
+  const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
-  const [ createBoard ] = useMutation(CREATE_BOARD)
-  const [ updateBoard ] = useMutation(UPDATE_BOARD)
+  const [isActive, setIsActive] = useState(false);
 
-  const [ isActive, setIsActive ] = useState(false)
-  
-  const [writer, setWriter] = useState('')
-  const [password, setPassword] = useState('')
-  const [title, setTitle] = useState('')
-  const [contents, setContents] = useState('')
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
 
-  const [writerErr, setWriterErr] = useState('')
-  const [passwordErr, setPasswordErr] = useState('')
-  const [titleErr, setTitleErr] = useState('')
-  const [contentsErr, setContentsErr] = useState('')
+  const [writerErr, setWriterErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+  const [titleErr, setTitleErr] = useState("");
+  const [contentsErr, setContentsErr] = useState("");
 
   const createBoardPush = async () => {
-
     try {
       const result = await createBoard({
         variables: {
@@ -46,151 +45,144 @@ export default function BoardWrite(props: IBoardWrite) {
             writer,
             password,
             title,
-            contents
-          }
-        }
-      })
-      // console.log(result);
-      // console.log(result.data)
-      router.push(`/boards/freeboard-post-moved/${result.data.createBoard._id}`)
-
-    } catch(error: any) {
-      alert(error.message)
+            contents,
+          },
+        },
+      });
+      router.push(
+        `/boards/freeboard-post-moved/${result.data.createBoard._id}`
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
     }
-    alert("게시글이 등록되었습니다.")
-  }
-// console.log(router)
+    alert("게시글이 등록되었습니다.");
+  };
   const onClickUpdate = async () => {
-    
-    const myvariables: Imyvariables = { 
+    const myvariables: Imyvariables = {
       boardId: router.query.ID,
       password,
-      updateBoardInput: {}
-    }
-    if(title) myvariables.updateBoardInput.title = title
-    if(contents) myvariables.updateBoardInput.contents = contents
-    
-    // console.log( myvariables)
+      updateBoardInput: {},
+    };
+    if (title) myvariables.updateBoardInput.title = title;
+    if (contents) myvariables.updateBoardInput.contents = contents;
 
-    const result2 = await updateBoard( {
-      variables: myvariables
-    })
-    router.push(`/boards/freeboard-post-moved/${result2.data.updateBoard._id}`)
-  }
+    const result2 = await updateBoard({
+      variables: myvariables,
+    });
+    router.push(`/boards/freeboard-post-moved/${result2.data.updateBoard._id}`);
+  };
 
   function onChangeName(event: ChangeEvent<HTMLInputElement>) {
-    setWriter(event.target.value)
+    setWriter(event.target.value);
 
-    if(event.target.value) {
-      setWriterErr("")
+    if (event.target.value) {
+      setWriterErr("");
     } else {
-      setWriterErr("* 이름을 입력해주세요.")
+      setWriterErr("* 이름을 입력해주세요.");
     }
-    if(event.target.value && password && title && contents) {
-      setIsActive(true)
-      setWriterErr("")
+    if (event.target.value && password && title && contents) {
+      setIsActive(true);
+      setWriterErr("");
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
   }
 
   function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value)
+    setPassword(event.target.value);
 
-    if(event.target.value) {
-      setPasswordErr("")
+    if (event.target.value) {
+      setPasswordErr("");
     } else {
-      setPasswordErr("* 비밀번호를 입력해주세요.")
+      setPasswordErr("* 비밀번호를 입력해주세요.");
     }
-    if(writer && event.target.value && title && contents) {
-      setIsActive(true)
-      setPasswordErr("")
+    if (writer && event.target.value && title && contents) {
+      setIsActive(true);
+      setPasswordErr("");
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
   }
 
   function onChangeTitle(event: ChangeEvent<HTMLInputElement>) {
-    setTitle(event.target.value)
+    setTitle(event.target.value);
 
-    if(event.target.value) {
-      setTitleErr("") 
+    if (event.target.value) {
+      setTitleErr("");
     } else {
-      setTitleErr("* 제목을 입력해주세요.")
+      setTitleErr("* 제목을 입력해주세요.");
     }
-    if(writer && password && event.target.value && contents) {
-      setIsActive(true)
-      setTitleErr("")
+    if (writer && password && event.target.value && contents) {
+      setIsActive(true);
+      setTitleErr("");
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
   }
 
   function onChangeText(event: ChangeEvent<HTMLTextAreaElement>) {
-    setContents(event.target.value)
+    setContents(event.target.value);
 
-    if(event.target.value) {
-      setContentsErr("")
+    if (event.target.value) {
+      setContentsErr("");
     } else {
-      setContentsErr("* 내용을 입력해주세요.")
+      setContentsErr("* 내용을 입력해주세요.");
     }
-    if(writer && password && title && event.target.value) {
-      setIsActive(true)
-      setContentsErr("")
+    if (writer && password && title && event.target.value) {
+      setIsActive(true);
+      setContentsErr("");
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
   }
-
 
   const onClickBtn = () => {
-
-
-    if(!writer) {
-      setWriterErr('* 이름을 입력해주세요.')
+    if (!writer) {
+      setWriterErr("* 이름을 입력해주세요.");
     } else {
-      setWriterErr('')
+      setWriterErr("");
     }
 
-    if(!password) {
-      setPasswordErr('* 비밀번호를 입력해주세요.')
+    if (!password) {
+      setPasswordErr("* 비밀번호를 입력해주세요.");
     } else {
-      setPassword('')
+      setPassword("");
     }
 
-    if(!title) {
-      setTitleErr('* 제목을 입력해주세요.')
+    if (!title) {
+      setTitleErr("* 제목을 입력해주세요.");
     } else {
-      setTitleErr('')
+      setTitleErr("");
     }
 
-    if(!contents) {
-      setContentsErr('* 내용을 작성해주세요.')
+    if (!contents) {
+      setContentsErr("* 내용을 작성해주세요.");
     } else {
-      setContentsErr('')
+      setContentsErr("");
     }
 
-    if(writer && password && title && contents) {
-      createBoardPush()
+    if (writer && password && title && contents) {
+      createBoardPush();
     }
-
-  }
+  };
 
   return (
-    <CreateBoardUI 
-      writer = {onChangeName}
-      password = {onChangePassword}
-      title = {onChangeTitle}
-      contents = {onChangeText}
-      writerErr = {writerErr}
-      passwordErr = {passwordErr}
-      titleErr = {titleErr}
-      contentsErr = {contentsErr}
-      onClickBtn = {onClickBtn}
-      onClickUpdate = {onClickUpdate}
-      isActive = {isActive}
-      isEdit = {props.isEdit}
-      data = {props.data}
+    <CreateBoardUI
+      writer={onChangeName}
+      password={onChangePassword}
+      title={onChangeTitle}
+      contents={onChangeText}
+      writerErr={writerErr}
+      passwordErr={passwordErr}
+      titleErr={titleErr}
+      contentsErr={contentsErr}
+      onClickBtn={onClickBtn}
+      onClickUpdate={onClickUpdate}
+      isActive={isActive}
+      isEdit={props.isEdit}
+      data={props.data}
     />
-  )
+  );
 }

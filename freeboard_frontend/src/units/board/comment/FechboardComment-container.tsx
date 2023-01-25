@@ -1,40 +1,40 @@
-import BoardFetchCommentUI from './FechboardComment-presenter'
-import { CREATE_COMMENT, FETCH_COMMENT, DELETE_COMMENT } from './FechboardComment-queries'
-import { useMutation, useQuery } from '@apollo/client'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import BoardFetchCommentUI from "./FechboardComment-presenter";
+import {
+  CREATE_COMMENT,
+  FETCH_COMMENT,
+  DELETE_COMMENT,
+} from "./FechboardComment-queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
+import { MouseEvent, useState } from "react";
 
 export default function BoardFetchComment() {
+  const router = useRouter();
 
-  const router = useRouter()
+  const [writer, setCommentWriter] = useState("");
+  const [password, setCommentPassword] = useState("");
+  const [contents, setCommentContents] = useState("");
 
-  const [writer, setCommentWriter] = useState("")
-  const [password, setCommentPassword] = useState("")
-  const [contents, setCommentContents] = useState("")
-
-  const [ createBoardComment ] = useMutation(CREATE_COMMENT)
-  const [ deleteBoardComment ] = useMutation(DELETE_COMMENT)
+  const [createBoardComment] = useMutation(CREATE_COMMENT);
+  const [deleteBoardComment] = useMutation(DELETE_COMMENT);
 
   const onChangeCommentWriter = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommentWriter(e.target.value)
-  }
+    setCommentWriter(e.target.value);
+  };
 
   const onChangeCommentPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommentPassword(e.target.value)
-  }
+    setCommentPassword(e.target.value);
+  };
 
-  const onChangeCommentContents = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommentContents(e.target.value)
-  }
+  const onChangeCommentContents = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setCommentContents(e.target.value);
+  };
 
   const { data } = useQuery(FETCH_COMMENT, {
-    variables: {boardId: router.query.ID}
-  })
-
-  // console.log(data)
-  console.log(data.fetchBoardComments.map((el:any) => ({
-    el
-  })))
+    variables: { boardId: router.query.ID },
+  });
 
   const createBoardCommentBtn = async () => {
     const result = await createBoardComment({
@@ -44,29 +44,49 @@ export default function BoardFetchComment() {
           writer,
           password,
           contents,
-          rating: 1
-        }
-      }
-    })
-    router.push(`/boards/freeboard-post-moved/${router.query.ID}`)
-  }
+          rating: 1,
+        },
+      },
+      refetchQueries: [
+        {
+          query: FETCH_COMMENT,
+          variables: { boardId: router.query.ID },
+        },
+      ],
+    });
+    setCommentWriter("");
+    setCommentPassword("");
+    setCommentContents("");
+  };
 
-  const deleteBoardCommentBtn = async () => {
+  const deleteBoardCommentBtn = async (event: MouseEvent<HTMLImageElement>) => {
+    const deleltePassword = prompt("비밀번호를 입력해주세요");
+
     await deleteBoardComment({
       variables: {
-        boardCommentId: router.query.ID
-      }
-    })
-  }
+        password: deleltePassword,
+        boardCommentId: event.currentTarget.id,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_COMMENT,
+          variables: { boardId: router.query.ID },
+        },
+      ],
+    });
+  };
 
   return (
-    <BoardFetchCommentUI 
-    onChangeCommentWriter = {onChangeCommentWriter}
-    onChangeCommentPassword = {onChangeCommentPassword}
-    onChangeCommentContents = {onChangeCommentContents}
-    createBoardCommentBtn = {createBoardCommentBtn}
-    deleteBoardCommentBtn = {deleteBoardCommentBtn}
-    data = {data}
+    <BoardFetchCommentUI
+      onChangeCommentWriter={onChangeCommentWriter}
+      onChangeCommentPassword={onChangeCommentPassword}
+      onChangeCommentContents={onChangeCommentContents}
+      createBoardCommentBtn={createBoardCommentBtn}
+      deleteBoardCommentBtn={deleteBoardCommentBtn}
+      writer={writer}
+      password={password}
+      contents={contents}
+      data={data}
     />
-  )
+  );
 }

@@ -1,12 +1,11 @@
-import { gql } from '@apollo/client';
-import exp from 'constants';
+import { gql } from "@apollo/client";
 
 export const CREATE_COMMENT = gql`
   mutation createBoardComment(
     $createBoardCommentInput: CreateBoardCommentInput!
-    $boardId: ID! 
+    $boardId: ID!
   ) {
-    createBoardComment (
+    createBoardComment(
       createBoardCommentInput: $createBoardCommentInput
       boardId: $boardId
     ) {
@@ -16,25 +15,21 @@ export const CREATE_COMMENT = gql`
       createdAt
     }
   }
-`
+`;
 
 export const FETCH_COMMENT = gql`
-  query fetchBoardComments(
-    $boardId: ID!
-  ){
-    fetchBoardComments (
-      boardId: $boardId
-    ){
+  query fetchBoardComments($boardId: ID!) {
+    fetchBoardComments(boardId: $boardId) {
       _id
       writer
       contents
       createdAt
     }
   }
-`
+`;
 
 export const DELETE_COMMENT = gql`
-  mutation deleteBoardComment($boardCommentId: ID!) {
-    deleteBoardComment(boardCommentId: $boardCommentId) 
+  mutation deleteBoardComment($boardCommentId: ID!, $password: String) {
+    deleteBoardComment(boardCommentId: $boardCommentId, password: $password)
   }
-`
+`;

@@ -1,12 +1,12 @@
-import { Fragment } from 'react'
+import { Fragment } from "react";
+import { IQuery } from "../../../commons/types/generated/types";
 
 interface IBoardListUI {
-  data?: any
-  onClickCreateBoard: () => void
+  data?: Pick<IQuery, "fetchBoards">;
+  onClickCreateBoard: () => void;
 }
 
 export default function BoardListUI(props: IBoardListUI) {
-  
   return (
     <Fragment>
       <table>
@@ -18,8 +18,8 @@ export default function BoardListUI(props: IBoardListUI) {
             <th>날짜</th>
           </tr>
         </thead>
-        
-        {props.data?.fetchBoards.map((el: any) => (
+
+        {props.data?.fetchBoards.map((el) => (
           <tbody key={el._id}>
             <tr>
               <td>1</td>
@@ -32,5 +32,5 @@ export default function BoardListUI(props: IBoardListUI) {
       </table>
       <button onClick={props.onClickCreateBoard}>게시물 등록하기</button>
     </Fragment>
-  )
+  );
 }
