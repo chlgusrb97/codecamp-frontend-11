@@ -13,7 +13,6 @@ export default function App() {
     <Space direction="vertical">
       <DatePicker onChange={onChange} />
       <div>{date}</div>
-      {/* <DatePicker onChange={onChange} picker="month" /> */}
     </Space>
   );
 }

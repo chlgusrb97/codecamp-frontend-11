@@ -4,6 +4,7 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [address, setAddress] = useState("");
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -17,20 +18,25 @@ const App = () => {
     setIsModalOpen(false);
   };
 
+  const handleComplete = (data) => {
+    console.log(data);
+    setIsModalOpen(false);
+    setAddress(data.address);
+  };
+
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        모달 열기
+        주소 검색
       </Button>
-      <span></span>
-      <Modal
-        title="Basic Modal"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <DaumPostcodeEmbed />;
-      </Modal>
+
+      {isModalOpen && (
+        <Modal title="주소" open={true} onOk={handleOk} onCancel={handleCancel}>
+          <DaumPostcodeEmbed onComplete={handleComplete} />;
+        </Modal>
+      )}
+
+      <span>{address}</span>
     </>
   );
 };

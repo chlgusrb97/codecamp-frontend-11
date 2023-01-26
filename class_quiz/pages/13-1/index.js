@@ -2,7 +2,7 @@ import { Rate } from "antd";
 import { useState } from "react";
 
 export default function App() {
-  const [value, setValue] = useState(3);
+  const [value, setValue] = useState(0);
 
   console.log(value);
 
