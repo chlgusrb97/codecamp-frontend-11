@@ -28,8 +28,10 @@ import {
   ConmmentSection2_Contents_Iconbox_delete,
 } from "./FechboardComment-styles";
 
-import React, { ChangeEvent, MouseEvent } from "react";
+import React, { ChangeEvent, MouseEvent, SetStateAction } from "react";
 import { IQuery } from "../../../commons/types/generated/types";
+import { Rate } from "antd";
+import { Button, Modal } from "antd";
 
 interface IBoardFetchCommentUI {
   onChangeCommentWriter: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -37,10 +39,12 @@ interface IBoardFetchCommentUI {
   onChangeCommentContents: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   createBoardCommentBtn: () => Promise<void>;
   deleteBoardCommentBtn: (event: MouseEvent<HTMLImageElement>) => void;
+  onChangeRate: (value: SetStateAction<number>) => void;
   writer: string;
   password: string;
   contents: string;
   data?: Pick<IQuery, "fetchBoardComments">;
+  value: number;
 }
 
 export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
@@ -66,13 +70,17 @@ export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
                 onChange={props.onChangeCommentPassword}
                 value={props.password}
               />
-              <Contents_Gradebox>
+              {/* <Contents_Gradebox>
                 <Contents_Gradebox_Icon src="/img/star.png" />
                 <Contents_Gradebox_Icon src="/img/star.png" />
                 <Contents_Gradebox_Icon src="/img/star.png" />
                 <Contents_Gradebox_Icon src="/img/star.png" />
                 <Contents_Gradebox_Icon src="/img/star.png" />
               </Contents_Gradebox>
+               */}
+              <span>
+                <Rate onChange={props.onChangeRate} value={props.value} />
+              </span>
             </ConmmentSection1_Contents_1>
             <ConmmentSection1_Contents_2>
               <ConmmentSection1_Contents_2_Textarea
@@ -100,13 +108,17 @@ export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
                   <ConmmentSection2_Contents_box_Writer>
                     {el.writer}
                   </ConmmentSection2_Contents_box_Writer>
-                  <Contents_Gradebox>
+                  {/* <Contents_Gradebox>
                     <Contents_Gradebox_Icon src="/img/star.png" />
                     <Contents_Gradebox_Icon src="/img/star.png" />
                     <Contents_Gradebox_Icon src="/img/star.png" />
                     <Contents_Gradebox_Icon src="/img/star.png" />
                     <Contents_Gradebox_Icon src="/img/star.png" />
                   </Contents_Gradebox>
+                   */}
+                  <span>
+                    <Rate value={el.rating} />
+                  </span>
                 </Contents_Container_Contents_box>
                 <ConmmentSection2_Contents_box_Text>
                   {el.contents}
@@ -126,6 +138,15 @@ export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
             </ConmmentSection2_Contents_Iconbox>
           </ConmmentSection2>
         ))}
+        <Modal
+          title="Basic Modal"
+          open={props.isModalOpen}
+          onOk={props.handleOk}
+          onCancel={props.handleCancel}
+        >
+          비밀번호를 입력해주세요
+          <input type="text" />
+        </Modal>
       </CommentWrapper>
     </CommentContainer>
   );

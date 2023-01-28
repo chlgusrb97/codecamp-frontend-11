@@ -7,6 +7,9 @@ export const CREATE_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      # boardAddress
+      # images
     }
   }
 `;

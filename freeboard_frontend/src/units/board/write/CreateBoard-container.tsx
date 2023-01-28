@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./CreateBoard-queries";
 import CreateBoardUI from "./CreateBoard-presenter";
-import { IMutation, IQuery } from "../../../commons/types/generated/types";
+import { IQuery } from "../../../commons/types/generated/types";
 
 interface IBoardWrite {
   isEdit: boolean;
@@ -16,6 +16,7 @@ interface Imyvariables {
   updateBoardInput: {
     title?: string;
     contents?: string;
+    youtubeUrl?: string;
   };
 }
 
@@ -26,16 +27,16 @@ export default function BoardWrite(props: IBoardWrite) {
   const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const [isActive, setIsActive] = useState(false);
-
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-
+  const [youtubeUrl, setYoutubeUrl] = useState("");
   const [writerErr, setWriterErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [titleErr, setTitleErr] = useState("");
   const [contentsErr, setContentsErr] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const createBoardPush = async () => {
     try {
@@ -46,6 +47,7 @@ export default function BoardWrite(props: IBoardWrite) {
             password,
             title,
             contents,
+            youtubeUrl,
           },
         },
       });
@@ -67,6 +69,7 @@ export default function BoardWrite(props: IBoardWrite) {
     };
     if (title) myvariables.updateBoardInput.title = title;
     if (contents) myvariables.updateBoardInput.contents = contents;
+    if (youtubeUrl) myvariables.updateBoardInput.youtubeUrl = youtubeUrl;
 
     const result2 = await updateBoard({
       variables: myvariables,
@@ -88,6 +91,10 @@ export default function BoardWrite(props: IBoardWrite) {
     } else {
       setIsActive(false);
     }
+  }
+
+  function onChangeYoutubeUrl(event: ChangeEvent<HTMLInputElement>) {
+    setYoutubeUrl(event.target.value);
   }
 
   function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
@@ -174,6 +181,7 @@ export default function BoardWrite(props: IBoardWrite) {
       password={onChangePassword}
       title={onChangeTitle}
       contents={onChangeText}
+      YoutubeUrl={onChangeYoutubeUrl}
       writerErr={writerErr}
       passwordErr={passwordErr}
       titleErr={titleErr}

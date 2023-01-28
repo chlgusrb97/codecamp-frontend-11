@@ -35,12 +35,14 @@ import {
 
 import React, { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../commons/types/generated/types";
+import { Button, Modal } from "antd";
 
 interface ICreateBoardUI {
   writer: (event: ChangeEvent<HTMLInputElement>) => void;
   password: (event: ChangeEvent<HTMLInputElement>) => void;
   title: (event: ChangeEvent<HTMLInputElement>) => void;
   contents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  YoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
   writerErr: string;
   passwordErr: string;
   titleErr: string;
@@ -119,7 +121,11 @@ export default function CreateBoardUI(props: ICreateBoardUI) {
 
         <Section5>
           <InputTitle>유튜브</InputTitle>
-          <Input placeholder="링크를 복사해주세요." />
+          <Input
+            placeholder="링크를 복사해주세요."
+            onChange={props.YoutubeUrl}
+            defaultValue={props.data?.fetchBoard.youtubeUrl}
+          />
         </Section5>
 
         <Section6>
