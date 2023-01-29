@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import FetchBoardUI from "./FetchBoard-presenter";
+import { Modal } from "antd";
 import {
   FETCH_BOARD,
   DELETE_BOARD,
@@ -18,6 +19,7 @@ export default function BoardFetch() {
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.ID },
   });
+  console.log(data);
 
   const onClickEditBtn = () => {
     router.push(`/boards/freeboard-post-moved/${router.query.ID}/edit`);
@@ -34,6 +36,7 @@ export default function BoardFetch() {
         boardId: router.query.ID,
       },
     });
+    Modal.success({ content: "게시글 등록에 성공했습니다!!" });
     router.push(`/boards`);
   };
 

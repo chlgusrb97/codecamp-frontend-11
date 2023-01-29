@@ -9,6 +9,7 @@ export const CREATE_BOARD = gql`
       contents
       youtubeUrl
       # boardAddress
+
       # images
     }
   }

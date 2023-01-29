@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./CreateBoard-queries";
 import CreateBoardUI from "./CreateBoard-presenter";
 import { IQuery } from "../../../commons/types/generated/types";
+import { Modal } from "antd";
+import type { Address } from "react-daum-postcode";
 
 interface IBoardWrite {
   isEdit: boolean;
@@ -37,6 +39,9 @@ export default function BoardWrite(props: IBoardWrite) {
   const [titleErr, setTitleErr] = useState("");
   const [contentsErr, setContentsErr] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [address, setAddress] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   const createBoardPush = async () => {
     try {
@@ -48,6 +53,11 @@ export default function BoardWrite(props: IBoardWrite) {
             title,
             contents,
             youtubeUrl,
+            boardAddress: {
+              zipcode,
+              address,
+              addressDetail,
+            },
           },
         },
       });
@@ -59,8 +69,9 @@ export default function BoardWrite(props: IBoardWrite) {
         alert(error.message);
       }
     }
-    alert("게시글이 등록되었습니다.");
+    Modal.success({ content: "게시글 등록에 성공했습니다!!" });
   };
+
   const onClickUpdate = async () => {
     const myvariables: Imyvariables = {
       boardId: router.query.ID,
@@ -175,6 +186,28 @@ export default function BoardWrite(props: IBoardWrite) {
     }
   };
 
+  const handleComplete = (data: Address) => {
+    setIsModalOpen(false);
+    setAddress(data.address);
+    setZipcode("");
+  };
+
+  const onChangeAddressDetail = (data: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(data.currentTarget.value);
+  };
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <CreateBoardUI
       writer={onChangeName}
@@ -191,6 +224,14 @@ export default function BoardWrite(props: IBoardWrite) {
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
+      isModalOpen={isModalOpen}
+      showModal={showModal}
+      handleOk={handleOk}
+      handleCancel={handleCancel}
+      handleComplete={handleComplete}
+      address={address}
+      zipcode={zipcode}
+      onChangeAddressDetail={onChangeAddressDetail}
     />
   );
 }

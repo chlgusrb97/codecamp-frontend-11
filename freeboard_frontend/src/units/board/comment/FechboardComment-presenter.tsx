@@ -40,6 +40,11 @@ interface IBoardFetchCommentUI {
   createBoardCommentBtn: () => Promise<void>;
   deleteBoardCommentBtn: (event: MouseEvent<HTMLImageElement>) => void;
   onChangeRate: (value: SetStateAction<number>) => void;
+  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  isModalOpen: boolean;
+  showModal: (event: MouseEvent<HTMLImageElement>) => void;
+  handleOk: () => Promise<void>;
+  handleCancel: () => void;
   writer: string;
   password: string;
   contents: string;
@@ -133,19 +138,18 @@ export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
               <ConmmentSection2_Contents_Iconbox_delete
                 src="/img/delete.png"
                 id={el._id}
-                onClick={props.deleteBoardCommentBtn}
+                onClick={props.showModal}
               />
             </ConmmentSection2_Contents_Iconbox>
           </ConmmentSection2>
         ))}
         <Modal
-          title="Basic Modal"
+          title="비밀번호를 입력해주세요."
           open={props.isModalOpen}
           onOk={props.handleOk}
           onCancel={props.handleCancel}
         >
-          비밀번호를 입력해주세요
-          <input type="text" />
+          <input type="password" onChange={props.onChangePassword} />
         </Modal>
       </CommentWrapper>
     </CommentContainer>

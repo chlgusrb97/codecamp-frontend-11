@@ -6,7 +6,8 @@ import {
 } from "./FechboardComment-queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { MouseEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, MouseEvent, SetStateAction, useState } from "react";
+import { Modal } from "antd";
 
 export default function BoardFetchComment() {
   const router = useRouter();
@@ -16,6 +17,8 @@ export default function BoardFetchComment() {
   const [contents, setCommentContents] = useState("");
   const [value, setValue] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalId, setModalId] = useState("");
+  const [modalPassword, setModalPassword] = useState("");
 
   const [createBoardComment] = useMutation(CREATE_COMMENT);
   const [deleteBoardComment] = useMutation(DELETE_COMMENT);
@@ -64,29 +67,53 @@ export default function BoardFetchComment() {
     setCommentPassword("");
     setCommentContents("");
     setValue(0);
-    console.log(result);
   };
 
   const deleteBoardCommentBtn = async (event: MouseEvent<HTMLImageElement>) => {
-    const deleltePassword = setIsModalOpen(true);
-    // prompt("비밀번호를 입력해주세요");
+    const deleltePassword = prompt("비밀번호를 입력해주세요");
 
-    await deleteBoardComment({
-      variables: {
-        password: deleltePassword,
-        boardCommentId: event.currentTarget.id,
-      },
-      refetchQueries: [
-        {
-          query: FETCH_COMMENT,
-          variables: { boardId: router.query.ID },
-        },
-      ],
-    });
+    // await deleteBoardComment({
+    //   variables: {
+    //     password: deleltePassword,
+    //     boardCommentId: event.currentTarget.id,
+    //   },
+    //   refetchQueries: [
+    //     {
+    //       query: FETCH_COMMENT,
+    //       variables: { boardId: router.query.ID },
+    //     },
+    //   ],
+    // });
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setModalPassword(event.target.value);
+  };
+
+  const showModal = (event: MouseEvent<HTMLImageElement>) => {
+    setIsModalOpen(true);
+    setModalId(event.currentTarget.id);
+    setModalPassword("");
+  };
+
+  const handleOk = async () => {
+    try {
+      await deleteBoardComment({
+        variables: {
+          password: modalPassword,
+          boardCommentId: modalId,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_COMMENT,
+            variables: { boardId: router.query.ID },
+          },
+        ],
+      });
+      setIsModalOpen(false);
+    } catch (error) {
+      Modal.error({ content: "비밀번호가 틀렸습니다!!" });
+    }
   };
 
   const handleCancel = () => {
@@ -101,12 +128,14 @@ export default function BoardFetchComment() {
       createBoardCommentBtn={createBoardCommentBtn}
       deleteBoardCommentBtn={deleteBoardCommentBtn}
       onChangeRate={onChangeRate}
+      onChangePassword={onChangePassword}
       writer={writer}
       password={password}
       contents={contents}
       data={data}
       value={value}
       isModalOpen={isModalOpen}
+      showModal={showModal}
       handleOk={handleOk}
       handleCancel={handleCancel}
     />

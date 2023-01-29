@@ -35,7 +35,9 @@ import {
 
 import React, { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../commons/types/generated/types";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
+import type { Address } from "react-daum-postcode";
 
 interface ICreateBoardUI {
   writer: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -52,6 +54,14 @@ interface ICreateBoardUI {
   isActive: boolean;
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
+  isModalOpen: boolean;
+  showModal: () => void;
+  handleOk: () => void;
+  handleCancel: () => void;
+  handleComplete: (data: Address) => void;
+  address: string;
+  zipcode: string;
+  onChangeAddressDetail: (data: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function CreateBoardUI(props: ICreateBoardUI) {
@@ -112,11 +122,26 @@ export default function CreateBoardUI(props: ICreateBoardUI) {
         <Section4>
           <InputTitle>주소</InputTitle>
           <Section4_AddressBox>
-            <AddressBox_Num>07250</AddressBox_Num>
-            <AddressBox_Btn>우편번호 검색</AddressBox_Btn>
+            <AddressBox_Num value={props.zipcode} disabled />
+            <AddressBox_Btn onClick={props.showModal}>
+              우편번호 검색
+            </AddressBox_Btn>
+            {props.isModalOpen && (
+              <Modal
+                title="주소 검색"
+                open={props.isModalOpen}
+                onOk={props.handleOk}
+                onCancel={props.handleCancel}
+              >
+                <DaumPostcodeEmbed onComplete={props.handleComplete} />
+              </Modal>
+            )}
           </Section4_AddressBox>
-          <Section4_Input1 />
-          <Section4_Input2 />
+          <Section4_Input1 value={props.address} disabled />
+          <Section4_Input2
+            placeholder="상세 주소를 입력해주세요."
+            onChange={props.onChangeAddressDetail}
+          />
         </Section4>
 
         <Section5>

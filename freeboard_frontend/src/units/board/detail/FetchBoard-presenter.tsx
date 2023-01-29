@@ -1,6 +1,8 @@
 import { IQuery } from "../../../commons/types/generated/types";
 import React from "react";
 import ReactPlayer from "react-player";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+
 import {
   Container,
   Wrapper,
@@ -68,6 +70,20 @@ export default function FetchBoardUI(props: IFetchBoardUI) {
             <Section1_WriterRight_LocationImg
               src="/img/location.png"
               alt="위치아이콘"
+              id="my-element"
+              data-tooltip-content={`${
+                props.data?.fetchBoard?.boardAddress?.address ?? ""
+              } ${props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}`}
+            />
+            <ReactTooltip
+              anchorId="my-element"
+              style={
+                {
+                  // position: "absolute",
+                  // display: "block",
+                  // left: "0",
+                }
+              }
             />
           </Section1_WriterRight>
         </Section1>

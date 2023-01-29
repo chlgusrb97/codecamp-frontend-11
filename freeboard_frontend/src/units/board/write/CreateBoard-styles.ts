@@ -109,13 +109,14 @@ export const Section4_AddressBox = styled.div`
   align-items: center;
 `;
 
-export const AddressBox_Num = styled.p`
+export const AddressBox_Num = styled.input`
   border: 1px solid #bdbdbd;
   background-color: #fff;
-  padding: 13px 16px;
+  padding: 14px 16px;
   margin-top: 16px;
   margin-bottom: 16px;
   width: 77px;
+
   text-align: center;
   color: #bdbdbd;
   box-sizing: border-box;
