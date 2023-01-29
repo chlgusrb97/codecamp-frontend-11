@@ -2,12 +2,17 @@ import LayoutHeader from "./header";
 import LayoutBanner from "./banner";
 import LayoutNavigation from "./navigation";
 
-export default function Layout() {
+interface ILayoutProps {
+  children: JSX.Element;
+}
+
+export default function Layout(props: ILayoutProps) {
   return (
     <>
       <LayoutHeader />
       <LayoutBanner />
-      <LayoutBanner />
+      <LayoutNavigation />
+      <div>{props.children}</div>
     </>
   );
 }

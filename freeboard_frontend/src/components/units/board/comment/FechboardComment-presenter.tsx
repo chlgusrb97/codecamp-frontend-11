@@ -8,8 +8,6 @@ import {
   ConmmentSection1_Contents,
   ConmmentSection1_Contents_1,
   ConmmentSection1_Contents_1_Input,
-  Contents_Gradebox,
-  Contents_Gradebox_Icon,
   ConmmentSection1_Contents_2,
   ConmmentSection1_Contents_2_Textarea,
   ConmmentSection1_Contents_2_box,
@@ -29,9 +27,9 @@ import {
 } from "./FechboardComment-styles";
 
 import React, { ChangeEvent, MouseEvent, SetStateAction } from "react";
-import { IQuery } from "../../../commons/types/generated/types";
+import { IQuery } from "../../../../commons/types/generated/types";
 import { Rate } from "antd";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 interface IBoardFetchCommentUI {
   onChangeCommentWriter: (e: ChangeEvent<HTMLInputElement>) => void;
