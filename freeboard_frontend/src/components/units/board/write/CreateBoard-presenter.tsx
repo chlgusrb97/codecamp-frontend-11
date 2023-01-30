@@ -34,7 +34,7 @@ import {
 } from "./CreateBoard-styles";
 
 import React, { ChangeEvent, MouseEvent } from "react";
-import { IQuery } from "../../../commons/types/generated/types";
+import { IQuery } from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import type { Address } from "react-daum-postcode";

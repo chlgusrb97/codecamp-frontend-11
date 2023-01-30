@@ -6,7 +6,7 @@ interface ILayoutProps {
   children: JSX.Element;
 }
 
-export default function Layout(props: ILayoutProps) {
+export default function Layout(props: ILayoutProps): JSX.Element {
   return (
     <>
       <LayoutHeader />

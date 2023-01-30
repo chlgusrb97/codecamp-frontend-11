@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./CreateBoard-queries";
 import CreateBoardUI from "./CreateBoard-presenter";
-import { IQuery } from "../../../commons/types/generated/types";
+import { IQuery } from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import type { Address } from "react-daum-postcode";
 
@@ -189,7 +189,7 @@ export default function BoardWrite(props: IBoardWrite) {
   const handleComplete = (data: Address) => {
     setIsModalOpen(false);
     setAddress(data.address);
-    setZipcode("");
+    setZipcode(data.zonecode);
   };
 
   const onChangeAddressDetail = (data: ChangeEvent<HTMLInputElement>) => {

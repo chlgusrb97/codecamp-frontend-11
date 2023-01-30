@@ -1,7 +1,9 @@
-import { IQuery } from "../../../commons/types/generated/types";
+import { IQuery } from "../../../../commons/types/generated/types";
 import React from "react";
 import ReactPlayer from "react-player";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+// import { Tooltip as ReactTooltip } from "react-tooltip";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 import {
   Container,
@@ -75,15 +77,13 @@ export default function FetchBoardUI(props: IFetchBoardUI) {
                 props.data?.fetchBoard?.boardAddress?.address ?? ""
               } ${props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""}`}
             />
-            <ReactTooltip
+            <Tooltip
               anchorId="my-element"
-              style={
-                {
-                  // position: "absolute",
-                  // display: "block",
-                  // left: "0",
-                }
-              }
+              style={{
+                position: "absolute",
+                display: "block",
+                right: 0,
+              }}
             />
           </Section1_WriterRight>
         </Section1>
@@ -99,7 +99,7 @@ export default function FetchBoardUI(props: IFetchBoardUI) {
           </Section02_ContentsText>
           <Section02_ContentsVideoBox>
             <ReactPlayer
-              url={props.data?.fetchBoard?.youtubeUrl}
+              url={String(props.data?.fetchBoard?.youtubeUrl)}
               controls={true}
             />
           </Section02_ContentsVideoBox>

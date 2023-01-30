@@ -6,5 +6,5 @@ const Wrapper = styled.div`
 `;
 
 export default function LayoutHeader() {
-  return <Wrapper>배너</Wrapper>;
+  return <Wrapper>헤더</Wrapper>;
 }

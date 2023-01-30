@@ -5,15 +5,14 @@ import ApolloSetting from "../src/components/commons/apollo";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 
-export default function App({ Component }: AppProps) {
+export default function App({ Component }: AppProps): JSX.Element {
   return (
     <ApolloSetting>
       <>
-        {/* <Global styles={globalStyles}> */}
+        <Global styles={globalStyles} />
         <Layout>
           <Component />
         </Layout>
-        {/* </Global> */}
       </>
     </ApolloSetting>
   );

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { IQuery } from "../../../commons/types/generated/types";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 interface IBoardListUI {
   data?: Pick<IQuery, "fetchBoards">;

@@ -36,7 +36,7 @@ export default function BoardFetch() {
         boardId: router.query.ID,
       },
     });
-    Modal.success({ content: "게시글 등록에 성공했습니다!!" });
+    Modal.success({ content: "게시글이 삭제되었습니다!!" });
     router.push(`/boards`);
   };
 

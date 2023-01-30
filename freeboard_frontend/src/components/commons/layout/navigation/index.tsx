@@ -6,5 +6,5 @@ const Wrapper = styled.div`
 `;
 
 export default function LayoutNavigation() {
-  return <Wrapper>배너</Wrapper>;
+  return <Wrapper>내비게이션</Wrapper>;
 }

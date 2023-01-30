@@ -115,6 +115,7 @@ export default function BoardFetchComment() {
       Modal.error({ content: "비밀번호가 틀렸습니다!!" });
     }
   };
+  console.log(modalPassword);
 
   const handleCancel = () => {
     setIsModalOpen(false);
