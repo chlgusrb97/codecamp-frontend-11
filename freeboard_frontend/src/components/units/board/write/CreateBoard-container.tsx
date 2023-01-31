@@ -3,23 +3,16 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./CreateBoard-queries";
 import CreateBoardUI from "./CreateBoard-presenter";
-import { IQuery } from "../../../../commons/types/generated/types";
+import {
+  IQuery,
+  IUpdateBoardInput,
+} from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import type { Address } from "react-daum-postcode";
 
 interface IBoardWrite {
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
-}
-
-interface Imyvariables {
-  boardId: any;
-  password: string;
-  updateBoardInput: {
-    title?: string;
-    contents?: string;
-    youtubeUrl?: string;
-  };
 }
 
 export default function BoardWrite(props: IBoardWrite) {
@@ -73,19 +66,36 @@ export default function BoardWrite(props: IBoardWrite) {
   };
 
   const onClickUpdate = async () => {
-    const myvariables: Imyvariables = {
-      boardId: router.query.ID,
-      password,
-      updateBoardInput: {},
-    };
-    if (title) myvariables.updateBoardInput.title = title;
-    if (contents) myvariables.updateBoardInput.contents = contents;
-    if (youtubeUrl) myvariables.updateBoardInput.youtubeUrl = youtubeUrl;
+    const updateBoardInput: IUpdateBoardInput = {};
+    if (title !== "") updateBoardInput.title = title;
+    if (contents !== "") updateBoardInput.contents = contents;
+    if (youtubeUrl !== "") updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode !== "" || address !== "" || addressDetail !== "") {
+      updateBoardInput.boardAddress = {};
+      if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address !== "") updateBoardInput.boardAddress.address = address;
+      if (addressDetail !== "")
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
 
-    const result2 = await updateBoard({
-      variables: myvariables,
-    });
-    router.push(`/boards/freeboard-post-moved/${result2.data.updateBoard._id}`);
+    try {
+      if (typeof router.query.ID !== "string") {
+        Modal.error({ content: "시스템에 문제가 있습니다." });
+        return;
+      }
+      const result = await updateBoard({
+        variables: {
+          boardId: router.query.ID,
+          password,
+          updateBoardInput,
+        },
+      });
+      router.push(
+        `/boards/freeboard-post-moved/${result.data.updateBoard._id}`
+      );
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: `${error.message}` });
+    }
   };
 
   function onChangeName(event: ChangeEvent<HTMLInputElement>) {

@@ -122,7 +122,14 @@ export default function CreateBoardUI(props: ICreateBoardUI) {
         <Section4>
           <InputTitle>주소</InputTitle>
           <Section4_AddressBox>
-            <AddressBox_Num value={props.zipcode} disabled />
+            <AddressBox_Num
+              value={
+                props.zipcode !== ""
+                  ? props.zipcode
+                  : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
+              }
+              disabled
+            />
             <AddressBox_Btn onClick={props.showModal}>
               우편번호 검색
             </AddressBox_Btn>
@@ -137,10 +144,20 @@ export default function CreateBoardUI(props: ICreateBoardUI) {
               </Modal>
             )}
           </Section4_AddressBox>
-          <Section4_Input1 value={props.address} disabled />
+          <Section4_Input1
+            value={
+              props.address !== ""
+                ? props.address
+                : props.data?.fetchBoard.boardAddress?.address ?? ""
+            }
+            disabled
+          />
           <Section4_Input2
             placeholder="상세 주소를 입력해주세요."
             onChange={props.onChangeAddressDetail}
+            defaultValue={
+              props.data?.fetchBoard?.boardAddress?.addressDetail ?? ""
+            }
           />
         </Section4>
 
@@ -149,7 +166,7 @@ export default function CreateBoardUI(props: ICreateBoardUI) {
           <Input
             placeholder="링크를 복사해주세요."
             onChange={props.YoutubeUrl}
-            defaultValue={props.data?.fetchBoard.youtubeUrl}
+            defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""}
           />
         </Section5>
 

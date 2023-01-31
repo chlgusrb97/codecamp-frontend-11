@@ -13,7 +13,6 @@ export const FETCH_BOARD = gql`
       images
       createdAt
       boardAddress {
-        _id
         zipcode
         address
         addressDetail

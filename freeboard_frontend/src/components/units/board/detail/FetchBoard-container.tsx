@@ -22,6 +22,7 @@ export default function BoardFetch() {
   console.log(data);
 
   const onClickEditBtn = () => {
+    console.log(data?.fetchBoard.boardAddress);
     router.push(`/boards/freeboard-post-moved/${router.query.ID}/edit`);
   };
 

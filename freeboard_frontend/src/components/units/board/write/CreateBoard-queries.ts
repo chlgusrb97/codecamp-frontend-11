@@ -28,6 +28,11 @@ export const UPDATE_BOARD = gql`
       _id
       title
       contents
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
