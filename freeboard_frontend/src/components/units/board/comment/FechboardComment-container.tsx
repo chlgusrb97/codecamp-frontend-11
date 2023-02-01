@@ -69,23 +69,6 @@ export default function BoardFetchComment() {
     setValue(0);
   };
 
-  const deleteBoardCommentBtn = async (event: MouseEvent<HTMLImageElement>) => {
-    const deleltePassword = prompt("비밀번호를 입력해주세요");
-
-    // await deleteBoardComment({
-    //   variables: {
-    //     password: deleltePassword,
-    //     boardCommentId: event.currentTarget.id,
-    //   },
-    //   refetchQueries: [
-    //     {
-    //       query: FETCH_COMMENT,
-    //       variables: { boardId: router.query.ID },
-    //     },
-    //   ],
-    // });
-  };
-
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setModalPassword(event.target.value);
   };
@@ -127,7 +110,6 @@ export default function BoardFetchComment() {
       onChangeCommentPassword={onChangeCommentPassword}
       onChangeCommentContents={onChangeCommentContents}
       createBoardCommentBtn={createBoardCommentBtn}
-      deleteBoardCommentBtn={deleteBoardCommentBtn}
       onChangeRate={onChangeRate}
       onChangePassword={onChangePassword}
       writer={writer}

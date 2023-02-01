@@ -30,13 +30,13 @@ import React, { ChangeEvent, MouseEvent, SetStateAction } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { Rate } from "antd";
 import { Modal } from "antd";
+// import InfiniteScroll from "react-infinite-scroller";
 
 interface IBoardFetchCommentUI {
   onChangeCommentWriter: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeCommentPassword: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeCommentContents: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   createBoardCommentBtn: () => Promise<void>;
-  deleteBoardCommentBtn: (event: MouseEvent<HTMLImageElement>) => void;
   onChangeRate: (value: SetStateAction<number>) => void;
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   isModalOpen: boolean;
@@ -73,14 +73,6 @@ export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
                 onChange={props.onChangeCommentPassword}
                 value={props.password}
               />
-              {/* <Contents_Gradebox>
-                <Contents_Gradebox_Icon src="/img/star.png" />
-                <Contents_Gradebox_Icon src="/img/star.png" />
-                <Contents_Gradebox_Icon src="/img/star.png" />
-                <Contents_Gradebox_Icon src="/img/star.png" />
-                <Contents_Gradebox_Icon src="/img/star.png" />
-              </Contents_Gradebox>
-               */}
               <span>
                 <Rate onChange={props.onChangeRate} value={props.value} />
               </span>
@@ -101,7 +93,7 @@ export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
             </ConmmentSection1_Contents_2>
           </ConmmentSection1_Contents>
         </ConmmentSection1>
-
+        {/* <InfiniteScroll></InfiniteScroll> */}
         {props.data?.fetchBoardComments.map((el) => (
           <ConmmentSection2 key={el._id}>
             <ConmmentSection2_Container>
@@ -111,16 +103,8 @@ export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
                   <ConmmentSection2_Contents_box_Writer>
                     {el.writer}
                   </ConmmentSection2_Contents_box_Writer>
-                  {/* <Contents_Gradebox>
-                    <Contents_Gradebox_Icon src="/img/star.png" />
-                    <Contents_Gradebox_Icon src="/img/star.png" />
-                    <Contents_Gradebox_Icon src="/img/star.png" />
-                    <Contents_Gradebox_Icon src="/img/star.png" />
-                    <Contents_Gradebox_Icon src="/img/star.png" />
-                  </Contents_Gradebox>
-                   */}
                   <span>
-                    <Rate value={el.rating} />
+                    <Rate value={el.rating} disabled />
                   </span>
                 </Contents_Container_Contents_box>
                 <ConmmentSection2_Contents_box_Text>
@@ -141,14 +125,16 @@ export default function BoardFetchCommentUI(props: IBoardFetchCommentUI) {
             </ConmmentSection2_Contents_Iconbox>
           </ConmmentSection2>
         ))}
-        <Modal
-          title="비밀번호를 입력해주세요."
-          open={props.isModalOpen}
-          onOk={props.handleOk}
-          onCancel={props.handleCancel}
-        >
-          <input type="password" onChange={props.onChangePassword} />
-        </Modal>
+        {props.isModalOpen && (
+          <Modal
+            title="비밀번호를 입력해주세요."
+            open={true}
+            onOk={props.handleOk}
+            onCancel={props.handleCancel}
+          >
+            <input type="password" onChange={props.onChangePassword} />
+          </Modal>
+        )}
       </CommentWrapper>
     </CommentContainer>
   );

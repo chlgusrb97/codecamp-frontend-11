@@ -1,12 +1,19 @@
 import { gql } from "@apollo/client";
 
-export const BOARDLIST_QUERY = gql`
-  query {
-    fetchBoards {
+export const FETCH_BOARDS = gql`
+  query fetchBoards($page: Int) {
+    fetchBoards(page: $page) {
       _id
       writer
       title
+      contents
       createdAt
     }
+  }
+`;
+
+export const FETCH_BOARDS_COUNTER = gql`
+  query {
+    fetchBoardsCount
   }
 `;
