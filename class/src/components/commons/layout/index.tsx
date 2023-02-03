@@ -4,7 +4,7 @@ import LayoutFooter from "./footer";
 import LayoutHeader from "./header";
 import LayoutNavigation from "./navigation";
 
-const HiDDEN_HEADERS = [
+const HIDDEN_HEADERS = [
   "/section13/13-01-libaray-icon",
   "/section13/13-02-libaray-star",
 ];
@@ -19,7 +19,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
   console.log(router.asPath);
   console.log("=========");
 
-  const isHiddenHeader = HiDDEN_HEADERS.includes(router.asPath);
+  const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
   console.log(isHiddenHeader);
 
   return (
