@@ -1,6 +1,6 @@
 import { Modal, Rate } from "antd";
 import * as S from "./commentList.styles";
-import { ICommentListUIProps } from "../write/commentWrite.types";
+import { ICommentListUIProps } from "./commentList.types";
 import InfiniteScroll from "react-infinite-scroller";
 
 export default function CommentListUI(props: ICommentListUIProps) {

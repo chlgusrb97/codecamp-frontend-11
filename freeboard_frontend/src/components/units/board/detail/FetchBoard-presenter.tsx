@@ -1,75 +1,37 @@
-import { IQuery } from "../../../../commons/types/generated/types";
 import React from "react";
 import ReactPlayer from "react-player";
-// import { Tooltip as ReactTooltip } from "react-tooltip";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-
-import {
-  Container,
-  Wrapper,
-  Section1,
-  Section1_WriterLeft,
-  WriterLeft_ProfileImg,
-  WriterLeft_TextBox,
-  WriterLeft_TextBox_Writer,
-  WriterLeft_TextBox_DateBox,
-  TextBox_DateBox_DateTitle,
-  TextBox_DateBox_DateContents,
-  Section1_WriterRight,
-  Section1_WriterRight_LinkImg,
-  Section1_WriterRight_LocationImg,
-  Section1_DivideLine,
-  Section02,
-  Section02_ContentsTitle,
-  Section02_ContentsImg,
-  Section02_ContentsText,
-  Section02_ContentsVideoBox,
-  Section02_ContentsUpDownBox,
-  Section02_ContentsUpDownBox_Up,
-  ContentsUpDownBox_Up_img,
-  ContentsUpDownBox_Up_count,
-  Section02_ContentsUpDownBox_Down,
-  ContentsUpDownBox_Down_img,
-  ContentsUpDownBox_Down_count,
-  OnclickButtonUl,
-  OnclickButtonLi,
-} from "./FechBoard-styles";
-
-interface IFetchBoardUI {
-  data?: Pick<IQuery, "fetchBoard">;
-  onClickEditBtn: () => void;
-  onClickDeleteBtn: () => Promise<void>;
-  onClickListBoard: () => void;
-  onClickLikeCount: () => Promise<void>;
-  onClickDisLikeCount: () => Promise<void>;
-}
+import { IFetchBoardUI } from "./FetchBoard.types";
+import * as S from "./FetchBoard-styles";
 
 export default function FetchBoardUI(props: IFetchBoardUI) {
   return (
-    <Container>
-      <Wrapper>
-        <Section1>
-          <Section1_WriterLeft>
-            <WriterLeft_ProfileImg src="/img/profile.png" alt="유저아이콘" />
-            <WriterLeft_TextBox>
-              <WriterLeft_TextBox_Writer>
+    <S.Container>
+      <S.Wrapper>
+        <S.Section1>
+          <S.Section1_WriterLeft>
+            <S.WriterLeft_ProfileImg src="/img/profile.png" alt="유저아이콘" />
+            <S.WriterLeft_TextBox>
+              <S.WriterLeft_TextBox_Writer>
                 {props.data?.fetchBoard?.writer}
-              </WriterLeft_TextBox_Writer>
-              <WriterLeft_TextBox_DateBox>
-                <TextBox_DateBox_DateTitle>Date : </TextBox_DateBox_DateTitle>
-                <TextBox_DateBox_DateContents>
+              </S.WriterLeft_TextBox_Writer>
+              <S.WriterLeft_TextBox_DateBox>
+                <S.TextBox_DateBox_DateTitle>
+                  Date :{" "}
+                </S.TextBox_DateBox_DateTitle>
+                <S.TextBox_DateBox_DateContents>
                   {props.data?.fetchBoard?.createdAt}
-                </TextBox_DateBox_DateContents>
-              </WriterLeft_TextBox_DateBox>
-            </WriterLeft_TextBox>
-          </Section1_WriterLeft>
-          <Section1_WriterRight>
-            <Section1_WriterRight_LinkImg
+                </S.TextBox_DateBox_DateContents>
+              </S.WriterLeft_TextBox_DateBox>
+            </S.WriterLeft_TextBox>
+          </S.Section1_WriterLeft>
+          <S.Section1_WriterRight>
+            <S.Section1_WriterRight_LinkImg
               src="/img/link.png"
               alt="링크아이콘"
             />
-            <Section1_WriterRight_LocationImg
+            <S.Section1_WriterRight_LocationImg
               src="/img/location.png"
               alt="위치아이콘"
               id="my-element"
@@ -85,59 +47,59 @@ export default function FetchBoardUI(props: IFetchBoardUI) {
                 right: 0,
               }}
             />
-          </Section1_WriterRight>
-        </Section1>
-        <Section1_DivideLine></Section1_DivideLine>
+          </S.Section1_WriterRight>
+        </S.Section1>
+        <S.Section1_DivideLine></S.Section1_DivideLine>
 
-        <Section02>
-          <Section02_ContentsTitle>
+        <S.Section02>
+          <S.Section02_ContentsTitle>
             {props.data?.fetchBoard?.title}
-          </Section02_ContentsTitle>
-          <Section02_ContentsImg src="/img/image.png" alt="이미지" />
-          <Section02_ContentsText>
+          </S.Section02_ContentsTitle>
+          <S.Section02_ContentsImg src="/img/image.png" alt="이미지" />
+          <S.Section02_ContentsText>
             {props.data?.fetchBoard?.contents}
-          </Section02_ContentsText>
-          <Section02_ContentsVideoBox>
+          </S.Section02_ContentsText>
+          <S.Section02_ContentsVideoBox>
             <ReactPlayer
               url={String(props.data?.fetchBoard?.youtubeUrl)}
               controls={true}
             />
-          </Section02_ContentsVideoBox>
-          <Section02_ContentsUpDownBox>
-            <Section02_ContentsUpDownBox_Up>
-              <ContentsUpDownBox_Up_img
+          </S.Section02_ContentsVideoBox>
+          <S.Section02_ContentsUpDownBox>
+            <S.Section02_ContentsUpDownBox_Up>
+              <S.ContentsUpDownBox_Up_img
                 src="/img/like.png"
                 alt="좋아요버튼"
                 onClick={props.onClickLikeCount}
               />
-              <ContentsUpDownBox_Up_count>
+              <S.ContentsUpDownBox_Up_count>
                 {props.data?.fetchBoard?.likeCount}
-              </ContentsUpDownBox_Up_count>
-            </Section02_ContentsUpDownBox_Up>
-            <Section02_ContentsUpDownBox_Down>
-              <ContentsUpDownBox_Down_img
+              </S.ContentsUpDownBox_Up_count>
+            </S.Section02_ContentsUpDownBox_Up>
+            <S.Section02_ContentsUpDownBox_Down>
+              <S.ContentsUpDownBox_Down_img
                 src="/img/dislike.png"
                 alt="싫어요버튼"
                 onClick={props.onClickDisLikeCount}
               />
-              <ContentsUpDownBox_Down_count>
+              <S.ContentsUpDownBox_Down_count>
                 {props.data?.fetchBoard?.dislikeCount}
-              </ContentsUpDownBox_Down_count>
-            </Section02_ContentsUpDownBox_Down>
-          </Section02_ContentsUpDownBox>
-        </Section02>
-      </Wrapper>
-      <OnclickButtonUl>
-        <OnclickButtonLi onClick={props.onClickListBoard}>
+              </S.ContentsUpDownBox_Down_count>
+            </S.Section02_ContentsUpDownBox_Down>
+          </S.Section02_ContentsUpDownBox>
+        </S.Section02>
+      </S.Wrapper>
+      <S.OnclickButtonUl>
+        <S.OnclickButtonLi onClick={props.onClickListBoard}>
           목록으로
-        </OnclickButtonLi>
-        <OnclickButtonLi onClick={props.onClickEditBtn}>
+        </S.OnclickButtonLi>
+        <S.OnclickButtonLi onClick={props.onClickEditBtn}>
           수정하기
-        </OnclickButtonLi>
-        <OnclickButtonLi onClick={props.onClickDeleteBtn}>
+        </S.OnclickButtonLi>
+        <S.OnclickButtonLi onClick={props.onClickDeleteBtn}>
           삭제하기
-        </OnclickButtonLi>
-      </OnclickButtonUl>
-    </Container>
+        </S.OnclickButtonLi>
+      </S.OnclickButtonUl>
+    </S.Container>
   );
 }

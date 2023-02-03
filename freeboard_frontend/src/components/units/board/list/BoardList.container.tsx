@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import { FETCH_BOARDS, FETCH_BOARDS_COUNTER } from "./Boardlist.queries";
-import BoardListUI from "./Boardlist.presenter";
-import { MouseEvent, useState } from "react";
+import { FETCH_BOARDS, FETCH_BOARDS_COUNTER } from "./BoardList.queries";
+import BoardListUI from "./BoardList.presenter";
+import { MouseEvent } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,

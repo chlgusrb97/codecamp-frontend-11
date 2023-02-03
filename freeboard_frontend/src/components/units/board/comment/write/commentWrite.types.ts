@@ -1,5 +1,4 @@
-import { ChangeEvent, MouseEvent, SetStateAction } from "react";
-import { IQuery } from "../../../../../commons/types/generated/types";
+import { ChangeEvent, SetStateAction } from "react";
 
 export interface ICommentWriteUI {
   onChangeCommentWriter: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -11,14 +10,4 @@ export interface ICommentWriteUI {
   password: string;
   contents: string;
   value: number;
-}
-
-export interface ICommentListUIProps {
-  data?: Pick<IQuery, "fetchBoardComments">;
-  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
-  isModalOpen: boolean;
-  showModal: (event: MouseEvent<HTMLImageElement>) => void;
-  handleOk: () => Promise<void>;
-  handleCancel: () => void;
-  onLoadMore: () => void;
 }

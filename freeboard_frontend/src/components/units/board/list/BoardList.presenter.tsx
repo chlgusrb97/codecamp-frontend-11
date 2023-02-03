@@ -1,22 +1,7 @@
 import { Fragment } from "react";
-import {
-  IQuery,
-  IQueryFetchBoardsArgs,
-} from "../../../../commons/types/generated/types";
-import { MouseEvent } from "react";
 import { getDate } from "../../../../commons/libraries/utils";
 import PanginationsBoardList from "../../../commons/paginations/boardList/paginations-boardList.container";
-import { ApolloQueryResult } from "@apollo/client";
-
-interface IBoardListUI {
-  data?: Pick<IQuery, "fetchBoards">;
-  onClickCreateBoard: () => void;
-  onClickMovedDetail: (event: MouseEvent<HTMLSpanElement>) => void;
-  refetch: (
-    variables?: Partial<IQueryFetchBoardsArgs> | undefined
-  ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-  count?: number;
-}
+import { IBoardListUI } from "./BoardList.types";
 
 export default function BoardListUI(props: IBoardListUI) {
   console.log(props);

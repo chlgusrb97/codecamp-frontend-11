@@ -1,19 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CREATE_BOARD, UPDATE_BOARD } from "./CreateBoard-queries";
-import CreateBoardUI from "./CreateBoard-presenter";
-import {
-  IQuery,
-  IUpdateBoardInput,
-} from "../../../../commons/types/generated/types";
+import { CREATE_BOARD, UPDATE_BOARD } from "./CreateBoard.queries";
+import CreateBoardUI from "./CreateBoard.presenter";
+import { IUpdateBoardInput } from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import type { Address } from "react-daum-postcode";
-
-interface IBoardWrite {
-  isEdit: boolean;
-  data?: Pick<IQuery, "fetchBoard">;
-}
+import { IBoardWrite } from "./CreateBoard.types";
 
 export default function BoardWrite(props: IBoardWrite) {
   const router = useRouter();
