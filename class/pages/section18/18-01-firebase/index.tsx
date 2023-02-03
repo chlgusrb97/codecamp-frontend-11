@@ -13,7 +13,7 @@ export default function FirebasePage(): JSX.Element {
     void addDoc(board, {
       writer: "철수",
       title: "안녕하세요",
-      contents: "반갑습니다!!",
+      contents: "반갑습니다!!!",
     });
   };
 
