@@ -11,7 +11,7 @@ export default function CommentListUI(props: ICommentListUIProps) {
           <S.CommentWrapper>
             {props.data?.fetchBoardComments.map((el) => (
               <CommentListFunc key={el._id} el={el} />
-            ))}
+            )) ?? <></>}
           </S.CommentWrapper>
         </S.CommentContainer>
       </InfiniteScroll>

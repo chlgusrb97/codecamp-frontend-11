@@ -5,31 +5,43 @@ import { useRouter } from "next/router";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { Modal } from "antd";
 import { ICommentListFunc } from "./commentList.types";
+import {
+  IMutation,
+  IMutationDeleteBoardCommentArgs,
+} from "../../../../../commons/types/generated/types";
 
 export default function CommentListFunc(props: ICommentListFunc) {
   const router = useRouter();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [modalId, setModalId] = useState("");
-  const [modalPassword, setModalPassword] = useState("");
+  const [deletePassword, setDeletePassword] = useState("");
 
-  const [deleteBoardComment] = useMutation(DELETE_COMMENT);
+  const [deleteBoardComment] = useMutation<
+    Pick<IMutation, "deleteBoardComment">,
+    IMutationDeleteBoardCommentArgs
+  >(DELETE_COMMENT);
+
+  const onClickUpdate = (): void => {
+    setIsEdit(true);
+  };
 
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setModalPassword(event.target.value);
+    setDeletePassword(event.target.value);
   };
 
   const showModal = (event: MouseEvent<HTMLImageElement>) => {
-    setIsModalOpen(true);
+    setIsDeleteModalOpen(true);
     setModalId(event.currentTarget.id);
-    setModalPassword("");
+    setDeletePassword("");
   };
 
   const handleOk = async () => {
     try {
       await deleteBoardComment({
         variables: {
-          password: modalPassword,
+          password: deletePassword,
           boardCommentId: modalId,
         },
         refetchQueries: [
@@ -39,24 +51,26 @@ export default function CommentListFunc(props: ICommentListFunc) {
           },
         ],
       });
-      setIsModalOpen(false);
+      setIsDeleteModalOpen(false);
     } catch (error) {
-      Modal.error({ content: "비밀번호가 틀렸습니다!!" });
+      Modal.error({ content: "비밀번호가 틀렸습니다." });
     }
   };
-  console.log(modalPassword);
 
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setIsDeleteModalOpen(false);
   };
   return (
     <CommentListFuncUI
       onChangePassword={onChangePassword}
-      isModalOpen={isModalOpen}
+      isDeleteModalOpen={isDeleteModalOpen}
       showModal={showModal}
       handleOk={handleOk}
       handleCancel={handleCancel}
       el={props.el}
+      onClickUpdate={onClickUpdate}
+      isEdit={isEdit}
+      setIsEdit={setIsEdit}
     />
   );
 }

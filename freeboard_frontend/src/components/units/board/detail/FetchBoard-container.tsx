@@ -19,7 +19,6 @@ export default function BoardFetch() {
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.ID },
   });
-  console.log(data);
 
   const onClickEditBtn = () => {
     console.log(data?.fetchBoard.boardAddress);

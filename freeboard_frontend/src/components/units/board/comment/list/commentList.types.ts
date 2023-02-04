@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
 import {
   IBoardComment,
   IQuery,
@@ -15,9 +15,12 @@ export interface ICommentListFunc {
 
 export interface ICommentListFuncUI {
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
-  isModalOpen: boolean;
+  onClickUpdate: () => void;
   showModal: (event: MouseEvent<HTMLImageElement>) => void;
   handleOk: () => Promise<void>;
   handleCancel: () => void;
   el: IBoardComment;
+  isDeleteModalOpen: boolean;
+  isEdit: boolean;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
 }

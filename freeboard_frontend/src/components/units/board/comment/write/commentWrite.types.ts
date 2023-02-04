@@ -1,4 +1,11 @@
-import { ChangeEvent, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { IBoardComment } from "../../../../../commons/types/generated/types";
+
+export interface ICommentWrite {
+  isEdit?: boolean;
+  setIsEdit?: Dispatch<SetStateAction<boolean>>;
+  el?: IBoardComment;
+}
 
 export interface ICommentWriteUI {
   onChangeCommentWriter: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -9,5 +16,8 @@ export interface ICommentWriteUI {
   writer: string;
   password: string;
   contents: string;
-  value: number;
+  rate: number;
+  isEdit?: boolean;
+  el?: IBoardComment;
+  onClickUpdate: () => Promise<void>;
 }
