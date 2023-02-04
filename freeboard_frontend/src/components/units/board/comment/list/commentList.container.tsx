@@ -1,26 +1,21 @@
 import CommentListUI from "./commentList.presenter";
-import { FETCH_COMMENT, DELETE_COMMENT } from "./commentList.queries";
-import { useMutation, useQuery } from "@apollo/client";
+import { FETCH_COMMENTS } from "./commentList.queries";
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, MouseEvent, useState } from "react";
-import { Modal } from "antd";
+import {
+  IQuery,
+  IQueryFetchBoardCommentsArgs,
+} from "../../../../../commons/types/generated/types";
 
 export default function CommentList() {
   const router = useRouter();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalId, setModalId] = useState("");
-  const [modalPassword, setModalPassword] = useState("");
-
-  const [deleteBoardComment] = useMutation(DELETE_COMMENT);
-
-  const { data, fetchMore } = useQuery(FETCH_COMMENT, {
-    variables: { boardId: router.query.ID },
+  const { data, fetchMore } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_COMMENTS, {
+    variables: { boardId: String(router.query.ID) },
   });
-
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setModalPassword(event.target.value);
-  };
 
   const onLoadMore = (): void => {
     if (data === undefined) return;
@@ -44,46 +39,5 @@ export default function CommentList() {
     });
   };
 
-  const showModal = (event: MouseEvent<HTMLImageElement>) => {
-    setIsModalOpen(true);
-    setModalId(event.currentTarget.id);
-    setModalPassword("");
-  };
-
-  const handleOk = async () => {
-    try {
-      await deleteBoardComment({
-        variables: {
-          password: modalPassword,
-          boardCommentId: modalId,
-        },
-        refetchQueries: [
-          {
-            query: FETCH_COMMENT,
-            variables: { boardId: router.query.ID },
-          },
-        ],
-      });
-      setIsModalOpen(false);
-    } catch (error) {
-      Modal.error({ content: "비밀번호가 틀렸습니다!!" });
-    }
-  };
-  console.log(modalPassword);
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  return (
-    <CommentListUI
-      data={data}
-      onChangePassword={onChangePassword}
-      onLoadMore={onLoadMore}
-      isModalOpen={isModalOpen}
-      showModal={showModal}
-      handleOk={handleOk}
-      handleCancel={handleCancel}
-    />
-  );
+  return <CommentListUI data={data} onLoadMore={onLoadMore} />;
 }

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import CommentWriteUI from "./commentWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { SetStateAction, useState } from "react";
-import { FETCH_COMMENT } from "../list/commentList.queries";
+import { FETCH_COMMENTS } from "../list/commentList.queries";
 
 export default function CommentWrite() {
   const router = useRouter();
@@ -46,7 +46,7 @@ export default function CommentWrite() {
       },
       refetchQueries: [
         {
-          query: FETCH_COMMENT,
+          query: FETCH_COMMENTS,
           variables: { boardId: router.query.ID },
         },
       ],
