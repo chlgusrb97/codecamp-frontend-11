@@ -33,8 +33,10 @@ export default class ClassCounterPage extends Component {
   render(): JSX.Element {
     return (
       <>
-        <div>{this.state.count}</div>
-        <button onClick={this.onClickCountUp}>카운트 올리기!!</button>
+        <div style={{ margin: "50px" }}>{this.state.count}</div>
+        <button style={{ marginLeft: "20px" }} onClick={this.onClickCountUp}>
+          카운트 올리기!!
+        </button>
         <button onClick={this.onClickMove}>나가기!</button>
       </>
     );

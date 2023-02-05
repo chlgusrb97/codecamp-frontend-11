@@ -24,9 +24,8 @@ const FETCH_BOARDS_COUNT = gql`
   }
 `;
 
-export default function FetchBoards() {
+export default function Pagination() {
   const [startPage, setStartPage] = useState(1);
-  const [isActive, setIsActive] = useState(false);
   const [targetId, setTargetId] = useState(1);
 
   const { data, refetch } = useQuery<

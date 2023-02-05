@@ -6,4 +6,5 @@ interface IStyles {
 
 export const Span = styled.span`
   color: ${(props: IStyles) => (props.isActive ? "red" : "black")};
+  margin: 10px;
 `;
