@@ -9,7 +9,7 @@ export default function CommentWriteUI(props: ICommentWriteUI) {
       <S.CommentWrapper>
         <S.ConmmentSection1>
           <S.ConmmentSection1_Head>
-            {props.isEdit === false && (
+            {!props.isEdit === true && (
               <>
                 <S.ConmmentSection1_Head_Icon src="/img/comment.png" />
                 <S.ConmmentSection1_Head_Title>

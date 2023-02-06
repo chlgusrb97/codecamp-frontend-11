@@ -22,11 +22,11 @@ export default function BoardFetch() {
 
   const onClickEditBtn = () => {
     console.log(data?.fetchBoard.boardAddress);
-    router.push(`/boards/freeboard-post-moved/${router.query.ID}/edit`);
+    router.push(`/main/boards/freeboard-post-moved/${router.query.ID}/edit`);
   };
 
   const onClickListBoard = () => {
-    router.push(`/boards`);
+    router.push(`/main/boards`);
   };
 
   const onClickDeleteBtn = async () => {
@@ -37,7 +37,7 @@ export default function BoardFetch() {
       },
     });
     Modal.success({ content: "게시글이 삭제되었습니다!!" });
-    router.push(`/boards`);
+    router.push(`/main/boards`);
   };
 
   const onClickLikeCount = async () => {

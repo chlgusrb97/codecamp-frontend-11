@@ -23,11 +23,11 @@ export default function BoardListWrite() {
   >(FETCH_BOARDS_COUNTER);
 
   const onClickMovedDetail = (event: MouseEvent<HTMLSpanElement>): void => {
-    router.push(`/boards/freeboard-post-moved/${event.currentTarget.id}`);
+    router.push(`/main/boards/freeboard-post-moved/${event.currentTarget.id}`);
   };
 
   const onClickCreateBoard = (): void => {
-    router.push(`/boards/freeboard-post `);
+    router.push(`/main/boards/freeboard-post `);
   };
 
   return (

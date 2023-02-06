@@ -48,7 +48,7 @@ export default function BoardWrite(props: IBoardWrite) {
         },
       });
       router.push(
-        `/boards/freeboard-post-moved/${result.data.createBoard._id}`
+        `/main/boards/freeboard-post-moved/${result.data.createBoard._id}`
       );
     } catch (error) {
       if (error instanceof Error) {
