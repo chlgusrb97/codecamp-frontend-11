@@ -4,6 +4,7 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { IFetchBoardUI } from "./FetchBoard.types";
 import * as S from "./FetchBoard-styles";
+import { getDate } from "../../../../commons/libraries/utils";
 
 export default function FetchBoardUI(props: IFetchBoardUI) {
   return (
@@ -21,7 +22,7 @@ export default function FetchBoardUI(props: IFetchBoardUI) {
                   Date :{" "}
                 </S.TextBox_DateBox_DateTitle>
                 <S.TextBox_DateBox_DateContents>
-                  {props.data?.fetchBoard?.createdAt}
+                  {getDate(props.data?.fetchBoard?.createdAt)}
                 </S.TextBox_DateBox_DateContents>
               </S.WriterLeft_TextBox_DateBox>
             </S.WriterLeft_TextBox>

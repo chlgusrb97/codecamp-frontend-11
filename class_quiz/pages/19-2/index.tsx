@@ -86,6 +86,7 @@ export default function ImageUpload() {
         },
       },
     });
+    console.log(result);
   };
 
   const onClickLike = (): void => {

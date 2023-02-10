@@ -10,7 +10,11 @@ export default function UseRefFoucus() {
 
   return (
     <>
-      <input type="password" ref={focusRef} />
+      <input
+        style={{ margin: "30px 30px", paddingLeft: "10px" }}
+        type="password"
+        ref={focusRef}
+      />
     </>
   );
 }
