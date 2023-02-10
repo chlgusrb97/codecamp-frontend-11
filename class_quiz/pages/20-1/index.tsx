@@ -1,13 +1,15 @@
 import { useQuery, gql } from "@apollo/client";
-import type { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../src/commons/types/generated/types";
+import _ from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
 const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int) {
-    fetchBoards(page: $page) {
+  query fetchBoards($page: Int, $search: String) {
+    fetchBoards(page: $page, search: $search) {
       _id
       writer
       title
@@ -17,6 +19,8 @@ const FETCH_BOARDS = gql`
 `;
 
 export default function PageSearch(): JSX.Element {
+  const [keyword, setKeyword] = useState("");
+
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
@@ -26,16 +30,34 @@ export default function PageSearch(): JSX.Element {
     void refetch({ page: Number(event.currentTarget.id) });
   };
 
-  const onChangeSearchInput = (event) => {
-    refetch({ search: event.currentTarget.value})
-  }
+  const getDebounce = _.debounce((value) => {
+    void refetch({ search: value, page: 1 });
+    setKeyword(value);
+  }, 500);
+
+  const onChangeSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
+    getDebounce(event.currentTarget.value);
+    console.log(event);
+  };
 
   return (
     <div>
-      <input type="text" />
+      <input type="text" onChange={onChangeSearchInput} />
       {data?.fetchBoards.map((el) => (
         <div key={el._id}>
-          <span style={{ margin: "10px" }}>{el.title}</span>
+          <span style={{ margin: "10px" }}>
+            {el.title
+              .replaceAll(keyword, `~!@${keyword}~!@`)
+              .split("~!@")
+              .map((el) => (
+                <span
+                  key={uuidv4()}
+                  style={{ color: el === keyword ? "red" : "black" }}
+                >
+                  {el}
+                </span>
+              ))}
+          </span>
           <span style={{ margin: "10px" }}>{el.writer}</span>
         </div>
       ))}
