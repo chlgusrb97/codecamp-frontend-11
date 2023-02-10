@@ -10,6 +10,7 @@ import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 import { AppProps } from "next/app";
 import { createUploadLink } from "apollo-upload-client";
+import { RecoilRoot } from "recoil";
 
 export default function App({ Component }: AppProps): JSX.Element {
   const uploadLink = createUploadLink({
@@ -23,13 +24,15 @@ export default function App({ Component }: AppProps): JSX.Element {
   });
 
   return (
-    <ApolloProvider client={client}>
-      <>
-        <Global styles={globalStyles} />
-        <Layout>
-          <Component />
-        </Layout>
-      </>
-    </ApolloProvider>
+    <RecoilRoot>
+      <ApolloProvider client={client}>
+        <>
+          <Global styles={globalStyles} />
+          <Layout>
+            <Component />
+          </Layout>
+        </>
+      </ApolloProvider>
+    </RecoilRoot>
   );
 }
