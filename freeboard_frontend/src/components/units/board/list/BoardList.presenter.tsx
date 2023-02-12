@@ -1,12 +1,19 @@
-import { Fragment } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { getDate } from "../../../../commons/libraries/utils";
 import PanginationsBoardList from "../../../commons/paginations/boardList/paginations-boardList.container";
+import BoardSearch from "../../../commons/search/BoardSearch/BoardSearch.container";
 import { IBoardListUI } from "./BoardList.types";
 
+const SECRETCODE = "!@#$";
+
 export default function BoardListUI(props: IBoardListUI) {
-  console.log(props);
   return (
-    <Fragment>
+    <>
+      <BoardSearch
+        refetch={props.refetch}
+        refetchCountData={props.refetchCountData}
+        onChangeKeyWord={props.onChangeKeyWord}
+      />
       <table>
         <thead>
           <tr>
@@ -22,7 +29,20 @@ export default function BoardListUI(props: IBoardListUI) {
             <tr>
               <td>{String(el._id).slice(-4).toLocaleUpperCase()}</td>
               <td id={el._id} onClick={props.onClickMovedDetail}>
-                {el.title}
+                {el.title
+                  .replaceAll(
+                    props.keyWord,
+                    `${SECRETCODE}${props.keyWord}${SECRETCODE}`
+                  )
+                  .split(`${SECRETCODE}`)
+                  .map((el) => (
+                    <span
+                      key={uuidv4()}
+                      style={{ color: el === props.keyWord ? "red" : "black" }}
+                    >
+                      {el}
+                    </span>
+                  ))}
               </td>
               <td>{el.writer}</td>
               <td>{getDate(el.createdAt)}</td>
@@ -32,6 +52,6 @@ export default function BoardListUI(props: IBoardListUI) {
       </table>
       <PanginationsBoardList refetch={props.refetch} count={props.count} />
       <button onClick={props.onClickCreateBoard}>게시물 등록하기</button>
-    </Fragment>
+    </>
   );
 }
