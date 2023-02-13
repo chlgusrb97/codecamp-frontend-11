@@ -61,13 +61,13 @@ export default function CommentWriteUI(props: ICommentWriteUI) {
                       : props.createBoardCommentBtn
                   }
                 >
-                  등록하기
+                  {props.isEdit === true ? "수정" : "등록"}
                 </S.Contents_2_box_Button>
               </S.ConmmentSection1_Contents_2_box>
             </S.ConmmentSection1_Contents_2>
           </S.ConmmentSection1_Contents>
         </S.ConmmentSection1>
-        <CommentList />
+        {/* {!props.isEdit && <CommentList />} */}
       </S.CommentWrapper>
     </S.CommentContainer>
   );

@@ -61,6 +61,7 @@ export default function CommentListFunc(props: ICommentListFunc) {
   const handleCancel = () => {
     setIsDeleteModalOpen(false);
   };
+  console.log("qqqqqq", isEdit);
   return (
     <>
       {isDeleteModalOpen && (
@@ -73,7 +74,7 @@ export default function CommentListFunc(props: ICommentListFunc) {
           <S.Modal_Input type="password" onChange={onChangePassword} />
         </Modal>
       )}
-      {!isEdit ? (
+      {!isEdit && (
         <S.ConmmentSection2 key={props.el._id}>
           <S.ConmmentSection2_Container>
             <S.ConmmentSection2_Usericon src="/img/profile.png" />
@@ -98,6 +99,7 @@ export default function CommentListFunc(props: ICommentListFunc) {
             <S.ConmmentSection2_Contents_Iconbox_edit
               src="/img/edit.png"
               onClick={onClickUpdate}
+              id={props.el._id}
             />
             <S.ConmmentSection2_Contents_Iconbox_delete
               src="/img/delete.png"
@@ -106,9 +108,13 @@ export default function CommentListFunc(props: ICommentListFunc) {
             />
           </S.ConmmentSection2_Contents_Iconbox>
         </S.ConmmentSection2>
-      ) : (
-        <CommentWrite isEdit={true} setIsEdit={setIsEdit} el={props.el} />
       )}
+      {isEdit && (
+        <>
+          <CommentWrite isEdit={true} setIsEdit={setIsEdit} el={props.el} />
+        </>
+      )}
+      {/* )} */}
     </>
   );
 }

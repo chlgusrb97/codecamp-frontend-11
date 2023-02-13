@@ -30,4 +30,6 @@ export interface ICreateBoardUI {
   address: string;
   zipcode: string;
   onChangeAddressDetail: (data: ChangeEvent<HTMLInputElement>) => void;
+  imageUrls: string[];
+  onChangeFileUrls: (imageUrls: string, index: number) => void;
 }

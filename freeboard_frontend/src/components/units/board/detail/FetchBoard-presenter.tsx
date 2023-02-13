@@ -56,7 +56,15 @@ export default function FetchBoardUI(props: IFetchBoardUI) {
           <S.Section02_ContentsTitle>
             {props.data?.fetchBoard?.title}
           </S.Section02_ContentsTitle>
-          <S.Section02_ContentsImg src="/img/image.png" alt="이미지" />
+          {props.data?.fetchBoard.images
+            ?.filter((el) => el)
+            .map((el) => (
+              <S.Section02_ContentsImg
+                key={el}
+                src={`https://storage.googleapis.com/${el}`}
+                alt="이미지"
+              />
+            ))}
           <S.Section02_ContentsText>
             {props.data?.fetchBoard?.contents}
           </S.Section02_ContentsText>

@@ -1,9 +1,14 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./CreateBoard.queries";
 import CreateBoardUI from "./CreateBoard.presenter";
-import { IUpdateBoardInput } from "../../../../commons/types/generated/types";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+  IUpdateBoardInput,
+} from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import type { Address } from "react-daum-postcode";
 import { IBoardWrite } from "./CreateBoard.types";
@@ -11,8 +16,14 @@ import { IBoardWrite } from "./CreateBoard.types";
 export default function BoardWrite(props: IBoardWrite) {
   const router = useRouter();
 
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+  const [updateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
 
   const [isActive, setIsActive] = useState(false);
   const [writer, setWriter] = useState("");
@@ -20,14 +31,16 @@ export default function BoardWrite(props: IBoardWrite) {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [writerErr, setWriterErr] = useState("");
-  const [passwordErr, setPasswordErr] = useState("");
-  const [titleErr, setTitleErr] = useState("");
-  const [contentsErr, setContentsErr] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
+  const [imageUrls, setImageUrls] = useState(["", "", ""]);
+
+  const [writerErr, setWriterErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+  const [titleErr, setTitleErr] = useState("");
+  const [contentsErr, setContentsErr] = useState("");
 
   const createBoardPush = async () => {
     try {
@@ -44,21 +57,26 @@ export default function BoardWrite(props: IBoardWrite) {
               address,
               addressDetail,
             },
+            images: [...imageUrls],
           },
         },
       });
       router.push(
-        `/main/boards/freeboard-post-moved/${result.data.createBoard._id}`
+        `/main/boards/freeboard-post-moved/${result.data?.createBoard._id}`
       );
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message);
+        Modal.error({ content: error.message });
       }
     }
     Modal.success({ content: "게시글 등록에 성공했습니다!!" });
   };
 
   const onClickUpdate = async () => {
+    const currentImages = JSON.stringify(imageUrls);
+    const defaultImages = JSON.stringify(props.data?.fetchBoard.images);
+    const isChangedImages = currentImages !== defaultImages;
+
     const updateBoardInput: IUpdateBoardInput = {};
     if (title !== "") updateBoardInput.title = title;
     if (contents !== "") updateBoardInput.contents = contents;
@@ -70,6 +88,7 @@ export default function BoardWrite(props: IBoardWrite) {
       if (addressDetail !== "")
         updateBoardInput.boardAddress.addressDetail = addressDetail;
     }
+    if (isChangedImages) updateBoardInput.images = imageUrls;
 
     try {
       if (typeof router.query.ID !== "string") {
@@ -83,8 +102,8 @@ export default function BoardWrite(props: IBoardWrite) {
           updateBoardInput,
         },
       });
-      router.push(
-        `/boards/freeboard-post-moved/${result.data.updateBoard._id}`
+      void router.push(
+        `/main/boards/freeboard-post-moved/${result.data?.updateBoard._id}`
       );
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: `${error.message}` });
@@ -110,6 +129,17 @@ export default function BoardWrite(props: IBoardWrite) {
   function onChangeYoutubeUrl(event: ChangeEvent<HTMLInputElement>) {
     setYoutubeUrl(event.target.value);
   }
+
+  const onChangeFileUrls = (imageUrl: string, index: number): void => {
+    const newImageUrls = [...imageUrls];
+    newImageUrls[index] = imageUrl;
+    setImageUrls(newImageUrls);
+  };
+
+  useEffect(() => {
+    const images = props.data?.fetchBoard.images;
+    if (images !== undefined && images !== null) setImageUrls([...images]);
+  }, [props.data]);
 
   function onChangePassword(event: ChangeEvent<HTMLInputElement>) {
     setPassword(event.target.value);
@@ -218,6 +248,7 @@ export default function BoardWrite(props: IBoardWrite) {
       title={onChangeTitle}
       contents={onChangeText}
       YoutubeUrl={onChangeYoutubeUrl}
+      imageUrls={imageUrls}
       writerErr={writerErr}
       passwordErr={passwordErr}
       titleErr={titleErr}
@@ -235,6 +266,7 @@ export default function BoardWrite(props: IBoardWrite) {
       address={address}
       zipcode={zipcode}
       onChangeAddressDetail={onChangeAddressDetail}
+      onChangeFileUrls={onChangeFileUrls}
     />
   );
 }

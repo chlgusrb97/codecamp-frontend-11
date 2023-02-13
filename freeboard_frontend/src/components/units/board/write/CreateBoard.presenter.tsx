@@ -2,6 +2,8 @@ import * as S from "./CreateBoard.styles";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { ICreateBoardUI } from "./CreateBoard.types";
+import ImageUpload from "../../../commons/ImageUpload/ImageUpload.container";
+import { v4 as uuidv4 } from "uuid";
 
 export default function CreateBoardUI(props: ICreateBoardUI) {
   return (
@@ -112,18 +114,14 @@ export default function CreateBoardUI(props: ICreateBoardUI) {
         <S.Section6>
           <S.InputTitle>사진 첨부</S.InputTitle>
           <S.Section6_Container>
-            <S.Container_Boxes>
-              <S.Boxes_Plus>+</S.Boxes_Plus>
-              <S.Boxes_Text>Upload</S.Boxes_Text>
-            </S.Container_Boxes>
-            <S.Container_Boxes>
-              <S.Boxes_Plus>+</S.Boxes_Plus>
-              <S.Boxes_Text>Upload</S.Boxes_Text>
-            </S.Container_Boxes>
-            <S.Container_Boxes>
-              <S.Boxes_Plus>+</S.Boxes_Plus>
-              <S.Boxes_Text>Upload</S.Boxes_Text>
-            </S.Container_Boxes>
+            {props.imageUrls.map((el, index) => (
+              <ImageUpload
+                key={uuidv4()}
+                index={index}
+                imageUrl={el}
+                onChangeFileUrls={props.onChangeFileUrls}
+              />
+            ))}
           </S.Section6_Container>
         </S.Section6>
 

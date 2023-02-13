@@ -162,7 +162,6 @@ export const Section6_Container = styled.div`
   flex-direction: row;
 `;
 export const Container_Boxes = styled.div`
-  position: relative;
   width: 78px;
   height: 78px;
   background-color: #bdbdbd;
@@ -171,6 +170,7 @@ export const Container_Boxes = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 export const Boxes_Plus = styled.div`
   color: #4f4f4f;
