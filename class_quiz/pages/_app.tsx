@@ -1,38 +1,26 @@
 // import '../styles/globals.css'
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  ApolloLink,
-} from "@apollo/client";
-import Layout from "../src/components/commons/Layout";
+import type { AppProps } from "next/app";
+import Layout from "../src/components/commons/layout";
+import ApolloSetting from "../src/components/commons/apollo";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
-import { AppProps } from "next/app";
-import { createUploadLink } from "apollo-upload-client";
 import { RecoilRoot } from "recoil";
 
 export default function App({ Component }: AppProps): JSX.Element {
-  const uploadLink = createUploadLink({
-    uri: "http://backend-practice.codebootcamp.co.kr/graphql",
-  });
-
-  const client = new ApolloClient({
-    // uri: "http://backend-practice.codebootcamp.co.kr/graphql",
-    link: ApolloLink.from([uploadLink]),
-    cache: new InMemoryCache(),
-  });
-
   return (
-    <RecoilRoot>
-      <ApolloProvider client={client}>
-        <>
-          <Global styles={globalStyles} />
-          <Layout>
-            <Component />
-          </Layout>
-        </>
-      </ApolloProvider>
-    </RecoilRoot>
+    <div>
+      <div>====== 여기는 _app.js 컴포넌트 시작부분입니다. ======</div>
+      <RecoilRoot>
+        <ApolloSetting>
+          <>
+            <Global styles={globalStyles} />
+            <Layout>
+              <Component />
+            </Layout>
+          </>
+        </ApolloSetting>
+      </RecoilRoot>
+      <div>====== 여기는 _app.js 컴포넌트 마지막부분입니다. ======</div>
+    </div>
   );
 }

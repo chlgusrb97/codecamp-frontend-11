@@ -33,11 +33,11 @@ export default function PageSearch(): JSX.Element {
   const getDebounce = _.debounce((value) => {
     void refetch({ search: value, page: 1 });
     setKeyword(value);
+    console.log(value);
   }, 500);
 
   const onChangeSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
     getDebounce(event.currentTarget.value);
-    console.log(event);
   };
 
   return (
