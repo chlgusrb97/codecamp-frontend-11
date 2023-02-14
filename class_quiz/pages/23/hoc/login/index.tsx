@@ -2,11 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../src/commons/stores";
-import {
-  IMutation,
-  IMutationLoginUserArgs,
-} from "../../../src/commons/types/generated/types";
+import { accessTokenState } from "../../../../src/commons/stores";
 
 const LOGIN_USER = gql`
   mutation loginUser($password: String!, $email: String!) {
@@ -16,24 +12,20 @@ const LOGIN_USER = gql`
   }
 `;
 
-export default function LoginPage() {
+export default function Login() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  const [loginUser] = useMutation<
-    Pick<IMutation, "loginUser">,
-    IMutationLoginUserArgs
-  >(LOGIN_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
 
-  const onChanegeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeId = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
-  const onChanegePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChagePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
@@ -48,12 +40,13 @@ export default function LoginPage() {
       const accessToken = result.data?.loginUser.accessToken;
 
       if (accessToken === undefined) {
-        alert("로그인에 실패하였습니다.");
+        alert("로그인 실패");
         return;
       }
       setAccessToken(accessToken);
+      localStorage.setItem("accessToken", accessToken);
 
-      void router.push("/Login/login-success");
+      void router.push("/23/hoc/main");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -61,11 +54,11 @@ export default function LoginPage() {
 
   return (
     <>
-      <input type="text" placeholder="이메일" onChange={onChanegeEmail} />
+      <input type="text" placeholder="아이디" onChange={onChangeId} />
       <input
         type="password"
         placeholder="비밀번호"
-        onChange={onChanegePassword}
+        onChange={onChagePassword}
       />
       <button onClick={onClickLogIn}>로그인</button>
     </>
