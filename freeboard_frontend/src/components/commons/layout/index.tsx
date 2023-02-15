@@ -3,8 +3,8 @@ import LayoutBanner from "./banner";
 import LayoutNavigation from "./navigation";
 import { useRouter } from "next/router";
 
-const HIDDEN_HEADERS = ["/main"];
-const HIDDEN_BANNER = ["/main"];
+const HIDDEN_HEADERS = ["/main", "/main/sign/signIn", "/main/sign/signUp"];
+const HIDDEN_BANNER = ["/main", "/main/sign/signIn", "/main/sign/signUp"];
 const HIDDEN_NAVIGATION = [""];
 
 interface ILayoutProps {
@@ -20,9 +20,9 @@ export default function Layout(props: ILayoutProps): JSX.Element {
 
   return (
     <>
+      {!isHiddenNavigation && <LayoutNavigation />}
       {!isHiddenHeader && <LayoutHeader />}
       {!isHiddenBanner && <LayoutBanner />}
-      {!isHiddenNavigation && <LayoutNavigation />}
       <div>{props.children}</div>
     </>
   );

@@ -21,11 +21,20 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const Logo = styled.img`
+const Logo = styled.span`
+  color: #eee;
   cursor: pointer;
+  font-size: 8rem;
+  font-family: Kanit-Bold;
+`;
+
+const P = styled.p`
+  color: #eee;
+  font-size: 32px;
+
+  font-family: Kanit-Light;
 `;
 
 export default function MainPage() {
@@ -38,10 +47,11 @@ export default function MainPage() {
     <>
       <Wrapper>
         <Video autoPlay muted playsInline loop={true}>
-          <source src="/img/main/background_video.mp4" type="video/mp4" />
+          <source src="/img/main/main_video.mp4" type="video/mp4" />
         </Video>
         <Container>
-          <Logo src="/img/main/NM-logo-white.png" onClick={onClickMoved} />
+          <Logo onClick={onClickMoved}>CAMPEE</Logo>
+          <P>LIVE YOUR LIFE.</P>
         </Container>
       </Wrapper>
     </>

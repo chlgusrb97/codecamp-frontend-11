@@ -3,14 +3,13 @@ import LayoutNavigationUI from "./navigation.presenter";
 
 export default function LayoutNavigationContainer() {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleSide = (toggled) => {
+  const toggleSide = (toggled: boolean) => {
     setIsOpen(toggled);
-    console.log(isOpen);
   };
   return (
     <LayoutNavigationUI
       isOpen={isOpen}
-      setOpen={setIsOpen}
+      setIsOpen={setIsOpen}
       toggleSide={toggleSide}
     />
   );
