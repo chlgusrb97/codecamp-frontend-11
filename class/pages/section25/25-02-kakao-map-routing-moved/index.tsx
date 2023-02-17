@@ -23,18 +23,18 @@ export default function KakaoMapPage(): JSX.Element {
         const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
         console.log(map);
 
-        // 마커가 표시될 위치입니다
+        // 마커가 표시될 위치입니다.
         const markerPosition = new window.kakao.maps.LatLng(
           33.450701,
           126.570667
         );
 
-        // 마커를 생성합니다
+        // 마커를 생성합니다.
         const marker = new window.kakao.maps.Marker({
           position: markerPosition,
         });
 
-        // 마커가 지도 위에 표시되도록 설정합니다
+        // 마커가 지도 위에 표시되도록 설정합니다.
         marker.setMap(map);
       });
     };
