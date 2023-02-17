@@ -3,8 +3,8 @@ import LayoutBanner from "./banner";
 import LayoutNavigation from "./navigation";
 import { useRouter } from "next/router";
 
-const HIDDEN_HEADERS = ["/main", "/main/sign/signIn", "/main/sign/signUp"];
-const HIDDEN_BANNER = ["/main", "/main/sign/signIn", "/main/sign/signUp"];
+const HIDDEN_HEADERS = ["/main", "/main/signIn", "/main/signUp"];
+const HIDDEN_BANNER = ["/main", "/main/signIn", "/main/signUp"];
 const HIDDEN_NAVIGATION = [""];
 
 interface ILayoutProps {

@@ -17,21 +17,30 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-export const Logo = styled.span`
+export const SignForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 450px;
+  height: 550px;
+  border-radius: 15px;
   color: #eee;
-  cursor: pointer;
-  font-size: 8rem;
-  font-family: Kanit-Bold;
 `;
 
-export const P = styled.p`
-  color: #eee;
-  font-size: 32px;
+export const Title = styled.span`
+  font-size: 40px;
+  margin-bottom: 30px;
+`;
 
-  font-family: Kanit-Light;
+export const Inputs_Box = styled.ul``;
+
+export const Error_Message = styled.span`
+  font-size: 12px;
+  color: tomato;
 `;

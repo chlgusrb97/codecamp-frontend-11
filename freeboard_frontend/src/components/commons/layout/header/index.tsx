@@ -65,11 +65,11 @@ export default function LayoutHeader() {
   const router = useRouter();
 
   const onClickSignIn = () => {
-    void router.push("/main/sign/signIn");
+    void router.push("/main/signIn");
   };
 
   const onClickSignUp = () => {
-    void router.push("/main/sign/signUp");
+    void router.push("/main/signUp");
   };
 
   return (

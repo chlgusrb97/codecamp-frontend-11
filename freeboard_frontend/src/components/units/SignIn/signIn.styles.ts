@@ -21,10 +21,26 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const SignForm = styled.div`
-  background-color: rgba(255, 255, 255, 0.3);
+export const SignForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 50px;
+  background-color: rgba(0, 0, 0, 0.5);
   width: 450px;
   height: 550px;
+  border-radius: 15px;
+  color: #eee;
+`;
+
+export const Title = styled.span`
+  font-size: 40px;
+  margin-bottom: 30px;
 `;
 
 export const Inputs_Box = styled.ul``;
+
+export const Error_Message = styled.span`
+  font-size: 12px;
+  color: tomato;
+`;
