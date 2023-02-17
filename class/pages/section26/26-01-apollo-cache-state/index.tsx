@@ -58,7 +58,7 @@ export default function StaticRountingMovedPage(): JSX.Element {
               const filteredPrev = prev.filter(
                 (el) => readField("_id", el) !== deletedId
               );
-              return [...filteredPrev]; // 삭제된 ID를 제외한 나머지 9개만 리턴
+              return [...filteredPrev]; // 삭제된 ID를 제외한 나머지 9개만 리턴!
 
               // const deletedId = data.deleteBoard; // 삭제 완료된 ID
               // const filteredPrev = prev.filter((el) => el._id !== deletedId);
