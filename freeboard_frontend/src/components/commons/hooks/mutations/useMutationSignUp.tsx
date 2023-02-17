@@ -2,7 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import {
   IMutation,
   IMutationCreateUserArgs,
-} from "../../../commons/types/generated/types";
+} from "../../../../commons/types/generated/types";
 
 const CREATE_USER = gql`
   mutation createUser($createUserInput: CreateUserInput!) {
@@ -14,11 +14,11 @@ const CREATE_USER = gql`
   }
 `;
 
-export default function useMutationCreateUser() {
+export function useMutationCreateUser() {
   const [createUser] = useMutation<
     Pick<IMutation, "createUser">,
     IMutationCreateUserArgs
   >(CREATE_USER);
 
-  return [createUser];
+  return createUser;
 }

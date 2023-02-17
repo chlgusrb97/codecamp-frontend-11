@@ -6,7 +6,12 @@ import InfiniteScroll from "react-infinite-scroller";
 export default function CommentListUI(props: ICommentListUIProps) {
   return (
     <S.InfiniteScroll_Box style={{ height: "700px", overflow: "auto" }}>
-      <InfiniteScroll pageStart={0} loadMore={props.onLoadMore}>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={props.onLoadMore}
+        hasMore={true}
+        useWindow={false}
+      >
         <S.CommentContainer>
           <S.CommentWrapper>
             {props.data?.fetchBoardComments.map((el) => (

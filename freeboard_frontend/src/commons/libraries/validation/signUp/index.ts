@@ -14,5 +14,5 @@ export const SignUpSchema = yup.object({
     .string()
     .required("비밀번호를 입력해 주세요")
     .min(8, "비밀번호는 8글자 이상 작성해 주세요.")
-    .oneOf([yup.ref("password")], "비밀번호가 같지 않습니다."),
+    .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다."),
 });

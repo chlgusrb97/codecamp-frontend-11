@@ -2,7 +2,7 @@ import * as S from "./signUp.styles";
 import SignUpInput from "../../commons/inputs/signUp/signUpInput.index";
 import SignUpButton from "../../commons/buttons/signUp/signUpButton.index";
 import useFormSignUp from "../../commons/react_hook_form/useFormSignUp";
-import useSignUpSubmit from "../../commons/customs/useSignUp/useSignUpSubmit";
+import useSignUpSubmit from "../../commons/hooks/customs/useSignUp/useSignUpSubmit";
 
 export default function SignUpUI() {
   const {

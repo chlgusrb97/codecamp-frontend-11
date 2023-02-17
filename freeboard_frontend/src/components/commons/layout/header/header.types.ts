@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface ILayoutNavigationUI {
+export interface ILayoutHeaderUIProps {
+  onClickSignIn: () => void;
+  onClickSignUp: () => void;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   toggleSide: (toggled: boolean) => void;
