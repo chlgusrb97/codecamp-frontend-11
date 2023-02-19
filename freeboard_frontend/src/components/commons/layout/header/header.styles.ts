@@ -39,7 +39,7 @@ export const Menu = styled.ul`
     font-family: Kanit-Light;
     font-size: 20px;
 
-    :not(:first-child) {
+    :not(:first-of-type) {
       margin-right: 50px;
     }
   }
@@ -91,3 +91,5 @@ export const Ul = styled.ul`
     cursor: pointer;
   }
 `;
+
+export const UserName = styled.span``;

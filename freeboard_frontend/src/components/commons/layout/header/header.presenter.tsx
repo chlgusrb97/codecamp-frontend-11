@@ -15,7 +15,12 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
             <li>SHOW YOUR LIFE.</li>
           </S.Menu>
           <S.Right_Header>
-            <li onClick={props.onClickSignIn}>로그인</li>
+            {localStorage.getItem("accessToken") !== null ? (
+              <S.UserName>{`${props.data?.fetchUserLoggedIn.name}님`}</S.UserName>
+            ) : (
+              <li onClick={props.onClickSignIn}>로그인</li>
+            )}
+            {/* <li onClick={props.onClickSignIn}>로그인</li> */}
             <li onClick={props.onClickSignUp}>회원가입</li>
           </S.Right_Header>
         </S.Header_Section>
