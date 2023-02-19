@@ -1,6 +1,7 @@
 import * as S from "./header.styles";
 import { ILayoutHeaderUIProps } from "./header.types";
 import { Fade as Hamburger } from "hamburger-react";
+import Link from "next/link";
 
 export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
   return (
@@ -15,7 +16,9 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
             <li>SHOW YOUR LIFE.</li>
           </S.Menu>
           <S.Right_Header>
-            {localStorage.getItem("accessToken") !== null ? (
+            {props.mounted &&
+            typeof window !== "undefined" &&
+            localStorage.getItem("accessToken") !== null ? (
               <S.UserName>{`${props.data?.fetchUserLoggedIn.name}님`}</S.UserName>
             ) : (
               <li onClick={props.onClickSignIn}>로그인</li>

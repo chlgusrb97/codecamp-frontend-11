@@ -8,6 +8,7 @@ export interface ILayoutHeaderUIProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   toggleSide: (toggled: boolean) => void;
   data?: Pick<IQuery, "fetchUserLoggedIn">;
+  mounted: boolean;
 }
 
 export interface IProps {

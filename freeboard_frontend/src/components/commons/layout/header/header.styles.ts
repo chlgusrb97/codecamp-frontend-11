@@ -92,4 +92,6 @@ export const Ul = styled.ul`
   }
 `;
 
-export const UserName = styled.span``;
+export const UserName = styled.span`
+  font-size: 12px;
+`;
