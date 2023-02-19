@@ -20,7 +20,6 @@ export default function useSignInSubmit() {
         },
       });
       const accessToken = result.data?.loginUser.accessToken;
-      console.log(accessToken);
 
       if (accessToken === undefined) {
         Modal.error({

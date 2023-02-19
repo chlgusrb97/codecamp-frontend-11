@@ -15,13 +15,12 @@ export default function LayoutHeaderContainer() {
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
 
-  console.log(data);
   useEffect(() => {
     setMounted(true);
 
     if (localStorage.getItem("accessToken") === null) {
       Modal.error({ content: "로그인 후 이용 가능합니다." });
-      // void router.push("/main/signin");
+      void router.push("/main/signin");
     }
   }, []);
 

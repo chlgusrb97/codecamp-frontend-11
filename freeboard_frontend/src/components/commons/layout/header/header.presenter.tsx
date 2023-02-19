@@ -1,7 +1,6 @@
 import * as S from "./header.styles";
 import { ILayoutHeaderUIProps } from "./header.types";
 import { Fade as Hamburger } from "hamburger-react";
-import Link from "next/link";
 
 export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
   return (
@@ -19,12 +18,16 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
             {props.mounted &&
             typeof window !== "undefined" &&
             localStorage.getItem("accessToken") !== null ? (
-              <S.UserName>{`${props.data?.fetchUserLoggedIn.name}님`}</S.UserName>
+              <>
+                <S.UserName>{`${props.data?.fetchUserLoggedIn.name}님`}</S.UserName>
+                <li>로그아웃</li>
+              </>
             ) : (
-              <li onClick={props.onClickSignIn}>로그인</li>
+              <>
+                <li onClick={props.onClickSignIn}>로그인</li>
+                <li onClick={props.onClickSignUp}>회원가입</li>
+              </>
             )}
-            {/* <li onClick={props.onClickSignIn}>로그인</li> */}
-            <li onClick={props.onClickSignUp}>회원가입</li>
           </S.Right_Header>
         </S.Header_Section>
         <S.HamburgerBox>

@@ -71,7 +71,7 @@ export default function CommentWrite(props: ICommentWrite) {
     setCommentContents("");
     setRate(0);
   };
-  console.log(props.isEdit);
+
   const onClickUpdate = async (): Promise<void> => {
     if (password === "") {
       Modal.error({ content: "비밀번호가 입력되지 않았습니다." });

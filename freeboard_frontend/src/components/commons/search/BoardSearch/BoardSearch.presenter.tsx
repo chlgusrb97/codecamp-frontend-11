@@ -2,7 +2,6 @@ import * as S from "./BoardSearch.styles";
 import { IBoardSearchUI } from "./BoardSearch.types";
 
 export default function BoardSearchUI(props: IBoardSearchUI) {
-  console.log(props.onChangeSearchEvent);
   return (
     <>
       <S.Wrapper>

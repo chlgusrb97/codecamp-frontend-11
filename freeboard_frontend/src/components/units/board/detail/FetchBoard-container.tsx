@@ -21,7 +21,6 @@ export default function BoardFetch() {
   });
 
   const onClickEditBtn = () => {
-    console.log(data?.fetchBoard.boardAddress);
     router.push(`/main/boards/freeboard-post-moved/${router.query.ID}/edit`);
   };
 
@@ -30,7 +29,6 @@ export default function BoardFetch() {
   };
 
   const onClickDeleteBtn = async () => {
-    console.log(router);
     await deleteBoard({
       variables: {
         boardId: router.query.ID,

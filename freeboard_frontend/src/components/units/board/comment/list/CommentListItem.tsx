@@ -61,7 +61,7 @@ export default function CommentListFunc(props: ICommentListFunc) {
   const handleCancel = () => {
     setIsDeleteModalOpen(false);
   };
-  console.log("qqqqqq", isEdit);
+
   return (
     <>
       {isDeleteModalOpen && (
