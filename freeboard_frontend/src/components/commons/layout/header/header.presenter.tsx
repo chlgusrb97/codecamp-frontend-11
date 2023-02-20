@@ -1,6 +1,7 @@
 import * as S from "./header.styles";
 import { ILayoutHeaderUIProps } from "./header.types";
 import { Fade as Hamburger } from "hamburger-react";
+import Link from "next/link";
 
 export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
   return (
@@ -12,12 +13,17 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
               <S.Logo>CAMPEE</S.Logo>
             </li>
             <li>LIFE MARKET</li>
-            <li>SHOW YOUR LIFE.</li>
+            <li>
+              <Link href="/main/boards">
+                <a>SHOW YOUR LIFE.</a>
+              </Link>
+            </li>
           </S.Menu>
           <S.Right_Header>
             {props.mounted &&
             typeof window !== "undefined" &&
-            localStorage.getItem("accessToken") !== null ? (
+            localStorage.getItem("accessToken") ? (
+              // props.data?.fetchUserLoggedIn.name
               <>
                 <S.UserName>{`${props.data?.fetchUserLoggedIn.name}님`}</S.UserName>
                 <li>로그아웃</li>

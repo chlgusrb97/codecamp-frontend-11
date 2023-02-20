@@ -1,6 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { Modal } from "antd";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
@@ -11,17 +9,15 @@ export default function LayoutHeaderContainer() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  // const [logout, setLogout] = useState(false);
 
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
 
+  // const [logoutUser] = useMutation(LOGOUT_USER);
+
   useEffect(() => {
     setMounted(true);
-
-    if (localStorage.getItem("accessToken") === null) {
-      Modal.error({ content: "로그인 후 이용 가능합니다." });
-      void router.push("/main/signin");
-    }
   }, []);
 
   const toggleSide = (toggled: boolean) => {
@@ -34,6 +30,16 @@ export default function LayoutHeaderContainer() {
   const onClickSignUp = (): void => {
     void router.push("/main/signUp");
   };
+
+  // const onClickLogout = async () => {
+  //   setLogout(true);
+
+  //   const result = await logoutUser({
+  //     variables: {
+  //       boolean: logout,
+  //     },
+  //   });
+  // };
   return (
     <LayoutHeaderUI
       isOpen={isOpen}

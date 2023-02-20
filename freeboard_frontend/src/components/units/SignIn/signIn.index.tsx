@@ -1,7 +1,7 @@
 import * as S from "./signIn.styles";
 import SignInInput from "../../commons/inputs/signIn/signInInput.index";
 import SignInButton from "../../commons/buttons/signIn/signInButton.index";
-import useFormSignIn from "../../commons/react_hook_form/useFormSignIn";
+import useFormSignIn from "../../commons/useForm/useFormSignIn";
 import useSignInSubmit from "../../commons/hooks/customs/useSignIn/useSignInSubmit";
 
 export default function SignInUI() {

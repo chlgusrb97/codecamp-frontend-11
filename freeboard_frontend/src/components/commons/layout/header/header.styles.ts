@@ -37,10 +37,17 @@ export const Menu = styled.ul`
   li {
     cursor: pointer;
     font-family: Kanit-Light;
-    font-size: 20px;
+    font-size: 18px;
 
     :not(:first-of-type) {
       margin-right: 50px;
+    }
+    a {
+      cursor: pointer;
+      font-family: Kanit-Light;
+      font-size: 18px;
+      color: #eee;
+      text-decoration: none;
     }
   }
 `;
