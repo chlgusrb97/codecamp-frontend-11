@@ -39,7 +39,7 @@ export default function ProductsListUI() {
               </S.Items_Box>
             )) ?? <></>}
           </S.InfiniteScroller>
-          <Link href="#">
+          <Link href="###">
             <S.Anchor>상품 등록</S.Anchor>
           </Link>
         </S.Container>
