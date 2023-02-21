@@ -4,8 +4,8 @@ import { MarketWriteSchema } from "../../../commons/libraries/validation/marketW
 import { ICreateUseditemInput } from "../../../commons/types/generated/types";
 
 export default function useFormMarketWrite() {
-  const result = useForm({
-    resolver: yupResolver<ICreateUseditemInput>(MarketWriteSchema),
+  const result = useForm<ICreateUseditemInput>({
+    resolver: yupResolver(MarketWriteSchema),
     mode: "onChange",
   });
   return result;

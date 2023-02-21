@@ -22,7 +22,9 @@ export default function useMaketWriteSubmit() {
         },
       },
     });
-    console.log(result);
+    router.push(
+      `/main/market/market-post-moved/${result.data?.createUseditem._id}`
+    );
   };
   return { onClickMarketWriteSubmit };
 }

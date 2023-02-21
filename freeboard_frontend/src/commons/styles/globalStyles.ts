@@ -24,11 +24,11 @@ export const globalStyles = css`
     src: url("/fonts/Kanit-Light.ttf");
   }
   @font-face {
-    font-family: NaNum-Bold;
+    font-family: Nanum-Bold;
     src: url("/fonts/NanumGothic-Bold.ttf");
   }
   @font-face {
-    font-family: NaNum-ExtraBold;
+    font-family: Nanum-ExtraBold;
     src: url("/fonts/NanumGothic-ExtraBold.ttf");
   }
   @font-face {

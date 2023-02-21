@@ -2,7 +2,7 @@ import MarketWriteButton from "../../../commons/buttons/marketWrite/marketWrite.
 import useMaketWriteSubmit from "../../../commons/hooks/customs/useMarketWrite/useMarketWriteSubmit";
 import MarketWriteInput from "../../../commons/inputs/marketWrite/marketWriteInput.index";
 import useFormMarketWrite from "../../../commons/useForm/useFormMarketWrite";
-import * as S from "./product.write.styles";
+import * as S from "./market.write.styles";
 
 export default function MarketWrite() {
   const {
@@ -24,7 +24,7 @@ export default function MarketWrite() {
           <S.ErrorMessage>{errors.name?.message}</S.ErrorMessage>
           <MarketWriteInput
             type="text"
-            placeholder="상품을 소개해주세요."
+            placeholder="상품 소개를 입력해주세요."
             register={register("remarks")}
           />
           <MarketWriteInput
@@ -35,7 +35,7 @@ export default function MarketWrite() {
 
           <MarketWriteInput
             type="text"
-            placeholder="상품명을 입력해주세요."
+            placeholder="상품 가격을 입력해주세요."
             register={register("price")}
           />
           <S.ErrorMessage>{errors.price?.message}</S.ErrorMessage>
