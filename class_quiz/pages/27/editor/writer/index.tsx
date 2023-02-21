@@ -15,7 +15,9 @@ const 나의그래프큐엘셋팅 = gql`
   }
 `;
 
-const ReactQuill = dynamic(async () => await import("react-quill"));
+const ReactQuill = dynamic(async () => await import("react-quill"), {
+  ssr: false,
+});
 
 export default function WebEditor() {
   const router = useRouter();
