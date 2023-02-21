@@ -1,6 +1,6 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import Script from "next/script";
+import { useState } from "react";
 
 declare const window: typeof globalThis & {
   IMP: any;
@@ -47,15 +47,13 @@ export default function LoadingPage() {
 
   return (
     <>
-      <Head>
-        <script
-          // {/* <!-- jQuery --> */}
-          type="text/javascript"
-          src="https://code.jquery.com/jquery-1.12.4.min.js"
-        ></script>
-        {/* <!-- iamport.payment.js --> */}
-        <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-      </Head>
+      <Script
+        // {/* <!-- jQuery --> */}
+        type="text/javascript"
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+      ></Script>
+      {/* <!-- iamport.payment.js --> */}
+      <Script src="https://cdn.iamport.kr/v1/iamport.js"></Script>
 
       <select name="job" onChange={onChangeMoney}>
         <option disabled selected>
