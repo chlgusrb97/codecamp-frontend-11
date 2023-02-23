@@ -16,9 +16,11 @@ export default function CommentList() {
   >(FETCH_COMMENTS, {
     variables: { boardId: String(router.query.ID) },
   });
+  console.log(data);
 
   const onLoadMore = (): void => {
     if (data === undefined) return;
+    console.log(data);
     void fetchMore({
       variables: {
         page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,

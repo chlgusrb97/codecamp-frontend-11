@@ -8,20 +8,20 @@ interface IInputProps {
 }
 
 const Input = styled.input`
-  width: 100%;
+  /* width: 100%;
   padding: 20px 15px;
   border-radius: 15px;
   background-color: #191919;
   border: 1px solid #eee;
   color: #eee;
-  outline: none;
+  outline: none; */
 
   ::placeholder {
     color: #928f8f;
   }
 `;
 
-export default function MarketWriteInput(props: IInputProps): JSX.Element {
+export default function ProductWriteInput(props: IInputProps): JSX.Element {
   return (
     <Input
       type={props.type ?? "text"}

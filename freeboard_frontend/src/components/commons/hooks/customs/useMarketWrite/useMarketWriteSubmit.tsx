@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { ICreateUseditemInput } from "../../../../../commons/types/generated/types";
-import useMutationMarketWrite from "../../mutations/useMutationMarketWrite";
+import useMutationCreateUseditem from "../../mutations/useMutationCreateUseditem";
 
-export default function useMaketWriteSubmit() {
+export default function useProductWriteSubmit() {
   const router = useRouter();
 
-  const [crateUsedItem] = useMutationMarketWrite();
+  const [crateUsedItem] = useMutationCreateUseditem();
 
-  const onClickMarketWriteSubmit = async (
+  const onClickProductWriteSubmit = async (
     data: ICreateUseditemInput
   ): Promise<void> => {
     const result = await crateUsedItem({
@@ -26,5 +26,5 @@ export default function useMaketWriteSubmit() {
       `/main/market/market-post-moved/${result.data?.createUseditem._id}`
     );
   };
-  return { onClickMarketWriteSubmit };
+  return { onClickProductWriteSubmit };
 }

@@ -1,12 +1,9 @@
 import Link from "next/link";
-import InfiniteScroll from "react-infinite-scroller";
 import useOnLoadMore from "../../../commons/hooks/customs/useOnLoadMore";
-import { useQueryFetchUsedItems } from "../../../commons/hooks/queries/useQueryFetchUsedItems";
 import * as S from "./product.list.styles";
 
 export default function ProductsListUI() {
-  const { data } = useQueryFetchUsedItems();
-  const { onLoadMore } = useOnLoadMore();
+  const { data, onLoadMore } = useOnLoadMore();
 
   return (
     <>
@@ -39,7 +36,7 @@ export default function ProductsListUI() {
               </S.Items_Box>
             )) ?? <></>}
           </S.InfiniteScroller>
-          <Link href="###">
+          <Link href="/main/products/products-post">
             <S.Anchor>상품 등록</S.Anchor>
           </Link>
         </S.Container>

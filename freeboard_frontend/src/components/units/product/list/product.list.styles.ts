@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroller";
 
 export const Wrapper = styled.div`

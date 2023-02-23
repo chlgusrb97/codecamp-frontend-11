@@ -25,5 +25,5 @@ export default function useOnLoadMore() {
     });
   };
 
-  return { onLoadMore };
+  return { data, onLoadMore };
 }

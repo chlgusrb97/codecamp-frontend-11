@@ -1,21 +1,21 @@
 import MarketWriteButton from "../../../commons/buttons/marketWrite/marketWrite.index";
-import useMaketWriteSubmit from "../../../commons/hooks/customs/useMarketWrite/useMarketWriteSubmit";
+import useProductWriteSubmit from "../../../commons/hooks/customs/useMarketWrite/useMarketWriteSubmit";
 import MarketWriteInput from "../../../commons/inputs/marketWrite/marketWriteInput.index";
 import useFormMarketWrite from "../../../commons/useForm/useFormMarketWrite";
-import * as S from "./market.write.styles";
+import * as S from "./product.write.styles";
 
-export default function MarketWrite() {
+export default function ProductWriteUI() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useFormMarketWrite();
-  const { onClickMarketWriteSubmit } = useMaketWriteSubmit();
+  const { onClickProductWriteSubmit } = useProductWriteSubmit();
 
   return (
     <>
       <S.Wrapper>
-        <S.Form onSubmit={handleSubmit(onClickMarketWriteSubmit)}>
+        <S.Form onSubmit={handleSubmit(onClickProductWriteSubmit)}>
           <MarketWriteInput
             type="text"
             placeholder="상품명을 입력해주세요."

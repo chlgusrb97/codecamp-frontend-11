@@ -75,7 +75,7 @@ export default function CommentListFunc(props: ICommentListFunc) {
         </Modal>
       )}
       {!isEdit && (
-        <S.ConmmentSection2 key={props.el._id}>
+        <S.ConmmentSection2>
           <S.ConmmentSection2_Container>
             <S.ConmmentSection2_Usericon src="/img/profile.png" />
             <S.Contents_Container_Contents>

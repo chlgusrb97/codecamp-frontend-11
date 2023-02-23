@@ -81,13 +81,7 @@ export const ConmmentSection2_Contents_Iconbox_delete = styled.img`
   cursor: pointer;
 `;
 
-export const InfiniteScroll_Box = styled.div`
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  ::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
-`;
+export const InfiniteScroll_Box = styled.div``;
 
 export const Modal_Input = styled.input`
   border: 1px solid #000;
