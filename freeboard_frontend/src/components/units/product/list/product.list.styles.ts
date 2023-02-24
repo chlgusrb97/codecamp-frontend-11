@@ -73,7 +73,7 @@ export const Anchor = styled.a`
   right: 40px;
   bottom: 40px;
   padding: 20px 40px;
-  background-color: #f94a29;
+  background-color: #f16767;
   color: #fff;
   font-family: Nanum-ExtraBold;
   font-size: 16px;

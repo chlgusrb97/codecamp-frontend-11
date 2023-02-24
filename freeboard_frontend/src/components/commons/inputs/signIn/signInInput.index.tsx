@@ -25,8 +25,8 @@ export default function SignInInput(props: IInputProps): JSX.Element {
   return (
     <Input
       type={props.type ?? "text"}
-      {...props.register}
       placeholder={props.placeholder}
+      {...props.register}
     />
   );
 }

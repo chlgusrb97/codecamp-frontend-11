@@ -17,14 +17,19 @@ export default function useProductWriteSubmit() {
           remarks: data.remarks,
           contents: data.contents,
           price: Number(data.price),
-          // tags: data.tags,
-          // images: data.images,
+          tags: data.tags,
+          images: data.images,
+          useditemAddress: {
+            address: data.useditemAddress?.address,
+            addressDetail: data.useditemAddress?.addressDetail,
+          },
         },
       },
     });
-    router.push(
-      `/main/market/market-post-moved/${result.data?.createUseditem._id}`
-    );
+    console.log(data);
+    // router.push(
+    //   `/main/market/market-post-moved/${result.data?.createUseditem._id}`
+    // );
   };
   return { onClickProductWriteSubmit };
 }

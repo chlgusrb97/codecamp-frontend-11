@@ -14,13 +14,11 @@ export default function CommentList() {
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_COMMENTS, {
-    variables: { boardId: String(router.query.ID) },
+    variables: { boardId: String(router.query.ID), page: 1 },
   });
-  console.log(data);
 
   const onLoadMore = (): void => {
     if (data === undefined) return;
-    console.log(data);
     void fetchMore({
       variables: {
         page: Math.ceil((data?.fetchBoardComments.length ?? 10) / 10) + 1,
