@@ -4,31 +4,40 @@ import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
-import { useRef } from "react";
+import { MutableRefObject } from "react";
 
 interface IToastEditor {
-  height: string;
-  onChangeContents: (value: string) => void;
+  editorRef: MutableRefObject<any>;
+  onChangeEditor: () => void;
+  contents: string;
 }
 
 export default function ToastEditor(props: IToastEditor) {
-  const opitons = {
-    usageStatistics: false,
-  };
-
-  const editor = new Editor(opitons);
-
-  console.log(editor.getInstance(), "QQQ");
+  const toolbarItems = [
+    ["heading", "bold", "italic", "strike"],
+    ["hr"],
+    ["ul", "ol", "task"],
+    ["table", "link"],
+    ["image"],
+    ["code"],
+    ["scrollSync"],
+  ];
 
   return (
-    <Editor
-      height={props.height}
-      autofocus={false}
-      initialEditType="markdown"
-      plugins={[colorSyntax]}
-      language="ko-KR"
-
-      // onChange={props.onChangeContents}
-    />
+    <>
+      {props && (
+        <Editor
+          ref={props.editorRef}
+          height="600px"
+          autofocus={false}
+          // initialEditType="markdown"
+          plugins={[colorSyntax]}
+          language="ko-KR"
+          toolbarItems={toolbarItems}
+          useCommandShortcut={false}
+          onChange={props.onChangeEditor}
+        />
+      )}
+    </>
   );
 }

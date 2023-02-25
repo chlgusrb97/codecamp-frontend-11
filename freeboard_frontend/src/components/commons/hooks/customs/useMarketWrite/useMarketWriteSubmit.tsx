@@ -26,10 +26,9 @@ export default function useProductWriteSubmit() {
         },
       },
     });
-    console.log(data);
-    // router.push(
-    //   `/main/market/market-post-moved/${result.data?.createUseditem._id}`
-    // );
+    router.push(
+      `/main/products/products-post-moved/${result.data?.createUseditem._id}`
+    );
   };
   return { onClickProductWriteSubmit };
 }

@@ -7,8 +7,12 @@ import dynamic from "next/dynamic";
 import KakaoMapPage from "../../../commons/kakakoMap";
 import ProductWriteButton from "../../../commons/buttons/productWrite/productWrite.index";
 import Link from "next/link";
+import Editor from "@toast-ui/editor";
+import { useRef } from "react";
 
 export default function ProductWriteUI() {
+  const editorRef = useRef<any>(null);
+
   const {
     register,
     handleSubmit,
@@ -27,13 +31,14 @@ export default function ProductWriteUI() {
     }
   );
 
-  const onChangeContents = (value: string) => {
-    console.log(value);
+  const onChangeEditor = (): void => {
+    const data = editorRef.current?.getInstance().getHTML();
+    console.log(data);
 
-    setValue("contents", value === "<p><br><p>" ? "" : value);
-
-    void trigger("contents");
+    setValue("contents", data === "<p><br></p>" ? "" : data);
   };
+
+  console.log(errors);
 
   return (
     <>
@@ -74,8 +79,9 @@ export default function ProductWriteUI() {
               <S.Input_title>상세설명</S.Input_title>
               <div style={{ width: "100%" }}>
                 <ToastEditor
-                  height={"600px"}
-                  onChangeContents={onChangeContents}
+                  contents=""
+                  editorRef={editorRef}
+                  onChangeEditor={onChangeEditor}
                 />
               </div>
             </li>
