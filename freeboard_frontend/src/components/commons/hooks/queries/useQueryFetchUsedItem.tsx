@@ -13,9 +13,11 @@ const FETCH_USED_ITEM = gql`
       remarks
       contents
       price
-      tages
-      images
-      seller
+      # tages
+      # images
+      seller {
+        name
+      }
     }
   }
 `;
@@ -30,5 +32,5 @@ export const useQueryFetchUsedItem = () => {
     variables: { useditemId: String(router.query.productsId) },
   });
 
-  return data;
+  return { data, router };
 };

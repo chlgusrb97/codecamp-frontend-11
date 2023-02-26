@@ -1,28 +1,29 @@
-import useProductWriteSubmit from "../../../commons/hooks/customs/useMarketWrite/useMarketWriteSubmit";
+import useProductWriteSubmit from "../../../commons/hooks/customs/useProductWrite/useProductWriteSubmit";
 import ProductWriteInput from "../../../commons/inputs/productWrite/productWriteInput.index";
 import useFormMarketWrite from "../../../commons/useForm/useFormMarketWrite";
 import * as S from "./product.write.styles";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import dynamic from "next/dynamic";
 import KakaoMapPage from "../../../commons/kakakoMap";
-import ProductWriteButton from "../../../commons/buttons/productWrite/productWrite.index";
 import Link from "next/link";
-import Editor from "@toast-ui/editor";
 import { useRef } from "react";
+import ProductButton from "../../../commons/buttons/product/product.index";
+import { IProductWriteUIProps } from "./product.write.types";
+import useProductEditSubmit from "../../../commons/hooks/customs/useProductEdit/useProductEditSubmit";
 
-export default function ProductWriteUI() {
+export default function ProductWriteUI(props: IProductWriteUIProps) {
   const editorRef = useRef<any>(null);
 
   const {
     register,
     handleSubmit,
     watch,
-    trigger,
     setValue,
     formState: { errors },
   } = useFormMarketWrite();
 
   const { onClickProductWriteSubmit } = useProductWriteSubmit();
+  const { onClickProductEditSubmit } = useProductEditSubmit();
 
   const ToastEditor = dynamic(
     async () => await import("../../../commons/ToastEditor"),
@@ -32,20 +33,24 @@ export default function ProductWriteUI() {
   );
 
   const onChangeEditor = (): void => {
-    const data = editorRef.current?.getInstance().getHTML();
+    const data = editorRef.current?.getInstance().getMarkdown();
     console.log(data);
 
     setValue("contents", data === "<p><br></p>" ? "" : data);
   };
 
-  console.log(errors);
-
   return (
     <>
       <S.Wrapper>
-        <S.Form onSubmit={handleSubmit(onClickProductWriteSubmit)}>
+        <S.Form
+          onSubmit={
+            props.isEdit
+              ? handleSubmit(onClickProductEditSubmit)
+              : handleSubmit(onClickProductWriteSubmit)
+          }
+        >
           <S.Section>
-            <S.title>상품등록</S.title>
+            <S.title>상품{props.isEdit ? "수정" : "등록"}</S.title>
             <li>
               <S.Input_title>상품이름</S.Input_title>
               <S.Box>
@@ -176,10 +181,10 @@ export default function ProductWriteUI() {
           <S.ProductButton_Box>
             <Link href="/main/products">
               <a>
-                <ProductWriteButton title="취소하기" type="button" />
+                <ProductButton title="취소" type="button" />
               </a>
             </Link>
-            <ProductWriteButton title="등록하기" />
+            <ProductButton title={props.isEdit ? "수정" : "등록"} />
           </S.ProductButton_Box>
         </S.Form>
       </S.Wrapper>

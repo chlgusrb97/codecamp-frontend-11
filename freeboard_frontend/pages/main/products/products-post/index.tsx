@@ -1,5 +1,5 @@
 import ProductWriteUI from "../../../../src/components/units/product/write/product.write.index";
 
-export default function MarketPost() {
-  return <ProductWriteUI />;
+export default function ProductPost() {
+  return <ProductWriteUI isEdit={false} />;
 }

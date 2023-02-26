@@ -9,12 +9,9 @@ export default function LayoutHeaderContainer() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  // const [logout, setLogout] = useState(false);
 
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
-
-  // const [logoutUser] = useMutation(LOGOUT_USER);
 
   useEffect(() => {
     setMounted(true);
