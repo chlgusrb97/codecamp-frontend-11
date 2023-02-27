@@ -19,7 +19,7 @@ export default function useSignInSubmit() {
           password: data.password,
         },
       });
-      const accessToken = result.data?.loginUser.accessToken;
+      const accessToken = result.data?.loginUserExample.accessToken;
 
       if (accessToken === undefined) {
         Modal.error({
@@ -28,7 +28,7 @@ export default function useSignInSubmit() {
         return;
       }
       SetAccessToken(accessToken);
-      localStorage.setItem("accessToken", accessToken);
+      // localStorage.setItem("accessToken", accessToken);
 
       void router.push("/main/boards");
     } catch (error) {

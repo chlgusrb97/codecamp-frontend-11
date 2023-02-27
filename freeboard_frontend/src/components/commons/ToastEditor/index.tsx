@@ -4,15 +4,16 @@ import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
-import { MutableRefObject } from "react";
+import { memo, MutableRefObject } from "react";
 
 interface IToastEditor {
   editorRef: MutableRefObject<any>;
-  onChangeEditor: () => void;
+  onChangeEditor: (value: string) => void;
   contents: string;
 }
 
 export default function ToastEditor(props: IToastEditor) {
+  console.log(props.contents);
   const toolbarItems = [
     ["heading", "bold", "italic", "strike"],
     ["hr"],
@@ -25,19 +26,17 @@ export default function ToastEditor(props: IToastEditor) {
 
   return (
     <>
-      {props && (
-        <Editor
-          ref={props.editorRef}
-          height="600px"
-          autofocus={false}
-          // initialEditType="markdown"
-          plugins={[colorSyntax]}
-          language="ko-KR"
-          toolbarItems={toolbarItems}
-          useCommandShortcut={false}
-          onChange={props.onChangeEditor}
-        />
-      )}
+      <Editor
+        // initialValue={props.contents}
+        ref={props.editorRef}
+        height="600px"
+        autofocus={false}
+        initialEditType="markdown"
+        plugins={[colorSyntax]}
+        language="ko-KR"
+        // toolbarItems={toolbarItems}
+        onChange={props.onChangeEditor}
+      />
     </>
   );
 }

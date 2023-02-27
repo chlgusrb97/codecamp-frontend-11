@@ -28,15 +28,6 @@ export default function LayoutHeaderContainer() {
     void router.push("/main/signUp");
   };
 
-  // const onClickLogout = async () => {
-  //   setLogout(true);
-
-  //   const result = await logoutUser({
-  //     variables: {
-  //       boolean: logout,
-  //     },
-  //   });
-  // };
   return (
     <LayoutHeaderUI
       isOpen={isOpen}

@@ -10,8 +10,18 @@ import { useRef } from "react";
 import ProductButton from "../../../commons/buttons/product/product.index";
 import { IProductWriteUIProps } from "./product.write.types";
 import useProductEditSubmit from "../../../commons/hooks/customs/useProductEdit/useProductEditSubmit";
+import { useAuth } from "../../../commons/hooks/useAuth";
+
+const ToastEditor = dynamic(
+  async () => await import("../../../commons/ToastEditor"),
+  {
+    ssr: false,
+  }
+);
 
 export default function ProductWriteUI(props: IProductWriteUIProps) {
+  useAuth();
+
   const editorRef = useRef<any>(null);
 
   const {
@@ -19,24 +29,18 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
     handleSubmit,
     watch,
     setValue,
+    trigger,
     formState: { errors },
   } = useFormMarketWrite();
 
   const { onClickProductWriteSubmit } = useProductWriteSubmit();
   const { onClickProductEditSubmit } = useProductEditSubmit();
 
-  const ToastEditor = dynamic(
-    async () => await import("../../../commons/ToastEditor"),
-    {
-      ssr: false,
-    }
-  );
-
   const onChangeEditor = (): void => {
     const data = editorRef.current?.getInstance().getMarkdown();
-    console.log(data);
 
     setValue("contents", data === "<p><br></p>" ? "" : data);
+    trigger("contents");
   };
 
   return (

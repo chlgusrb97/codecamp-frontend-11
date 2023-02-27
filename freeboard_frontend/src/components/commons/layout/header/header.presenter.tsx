@@ -20,10 +20,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
             </li>
           </S.Menu>
           <S.Right_Header>
-            {props.mounted &&
-            typeof window !== "undefined" &&
-            localStorage.getItem("accessToken") ? (
-              // props.data?.fetchUserLoggedIn.name
+            {props.data?.fetchUserLoggedIn._id ? (
               <>
                 <S.UserName>{`${props.data?.fetchUserLoggedIn.name}님`}</S.UserName>
                 <li>로그아웃</li>
