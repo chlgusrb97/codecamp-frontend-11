@@ -23,7 +23,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
             {props.data?.fetchUserLoggedIn._id ? (
               <>
                 <S.UserName>{`${props.data?.fetchUserLoggedIn.name}님`}</S.UserName>
-                <li>로그아웃</li>
+                <li onClick={props.onClickLogoutUser}>로그아웃</li>
               </>
             ) : (
               <>

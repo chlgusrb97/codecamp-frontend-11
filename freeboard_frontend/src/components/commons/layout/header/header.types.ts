@@ -4,6 +4,7 @@ import { IQuery } from "../../../../commons/types/generated/types";
 export interface ILayoutHeaderUIProps {
   onClickSignIn: () => void;
   onClickSignUp: () => void;
+  onClickLogoutUser: () => void;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   toggleSide: (toggled: boolean) => void;

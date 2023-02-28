@@ -1,9 +1,10 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { IQuery } from "../../../../commons/types/generated/types";
+import { IMutation, IQuery } from "../../../../commons/types/generated/types";
 import LayoutHeaderUI from "./header.presenter";
-import { FETCH_USER_LOGGED_IN } from "./header.queries";
+import { FETCH_USER_LOGGED_IN, LOGOUT_USER } from "./header.queries";
 
 export default function LayoutHeaderContainer() {
   const router = useRouter();
@@ -12,6 +13,8 @@ export default function LayoutHeaderContainer() {
 
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
+
+  const [logoutUser] = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
 
   useEffect(() => {
     setMounted(true);
@@ -28,6 +31,13 @@ export default function LayoutHeaderContainer() {
     void router.push("/main/signUp");
   };
 
+  const onClickLogoutUser = async () => {
+    await logoutUser();
+    Modal.success({ content: "로그아웃 되었습니다." });
+
+    window.location.reload();
+  };
+
   return (
     <LayoutHeaderUI
       isOpen={isOpen}
@@ -35,6 +45,7 @@ export default function LayoutHeaderContainer() {
       toggleSide={toggleSide}
       onClickSignIn={onClickSignIn}
       onClickSignUp={onClickSignUp}
+      onClickLogoutUser={onClickLogoutUser}
       data={data}
       mounted={mounted}
     />
