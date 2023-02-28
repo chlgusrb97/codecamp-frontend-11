@@ -164,23 +164,6 @@ export default function ProductWriteUI(props: IProductWriteUIProps) {
               </S.Img_Box>
             </li>
             <S.divideLine></S.divideLine>
-            <li>
-              <S.Input_title>메인 이미지 선택</S.Input_title>
-              <S.Radio_Box>
-                <li>
-                  <input type="radio" name="select_Img" />
-                  <label>이미지 1</label>
-                </li>
-                <li>
-                  <input type="radio" name="select_Img" />
-                  <label>이미지 2</label>
-                </li>
-                <li>
-                  <input type="radio" name="select_Img" />
-                  <label>이미지 3</label>
-                </li>
-              </S.Radio_Box>
-            </li>
           </S.Section>
           <S.ProductButton_Box>
             <Link href="/main/products">
