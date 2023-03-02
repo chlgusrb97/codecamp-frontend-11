@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 const myImages = [
   "/images/01.jpeg",
@@ -16,6 +16,7 @@ const myImages = [
 const newImages = [];
 
 export default function PreloadPage() {
+  const ref = useRef(null) as MutableRefObject<HTMLDivElement>;
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -23,21 +24,32 @@ export default function PreloadPage() {
       const img = new Image();
       img.src = myImages[index];
       img.onload = () => {
-        newImages.push(myImages[index]);
+        // newImages.push(myImages[index]);
+
+        newImages.push(img);
       };
     });
   }, []);
 
   const onClickShowImages = () => {
     setHidden((prev) => !prev);
+    if (ref.current) {
+      console.log(newImages);
+      newImages.forEach((el) => {
+        ref.current.append(el);
+        // ref?.current?.appendChild(el);
+      });
+    }
   };
+  console.log(newImages);
 
   return (
-    <>
+    <div ref={ref}>
       <button onClick={onClickShowImages}>
         이미지 {hidden ? "숨기기" : "보여주기"}
       </button>
-      {hidden ? newImages.map((el) => <img src={el} />) : <></>}
-    </>
+      {/* {hidden ? newImages.map((el) => <img src={el} />) : <></>} */}
+      {/* {hidden ? newImages.map((el) => console.log(el.props, "안녕")) : <></>} */}
+    </div>
   );
 }
