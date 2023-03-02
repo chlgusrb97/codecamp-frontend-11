@@ -9,10 +9,6 @@ import {
   wrapAsync,
   wrapFileAsync,
 } from "../../../src/commons/libraries/asyncFunc";
-import {
-  IMutation,
-  IMutationUploadFileArgs,
-} from "../../../src/commons/types/generated/types";
 
 // const UPLOAD_FILE = gql`
 //   mutation uploadFile($file: Upload!) {
@@ -42,10 +38,7 @@ export default function ImageUploadPage(): JSX.Element {
   const [imgUrl, setImgUrl] = useState("");
   const [file, setFile] = useState<File>();
 
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
   const [나의함수] = useMutation(나의그래프큐엘셋팅);
 
   const onClickSubmit = async (): Promise<void> => {
@@ -71,7 +64,7 @@ export default function ImageUploadPage(): JSX.Element {
   };
 
   const onChangeFile = async (
-    event?: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
     const file = event?.target.files?.[0]; // 배열로 들어오는 이유: <input type="file" multiple /> 일떄, 여러개 드래그 가능
     if (file === undefined) return;
