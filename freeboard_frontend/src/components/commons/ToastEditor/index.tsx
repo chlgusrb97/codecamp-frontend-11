@@ -13,16 +13,7 @@ interface IToastEditor {
 }
 
 export default function ToastEditor(props: IToastEditor) {
-  console.log(props.contents);
-  const toolbarItems = [
-    ["heading", "bold", "italic", "strike"],
-    ["hr"],
-    ["ul", "ol", "task"],
-    ["table", "link"],
-    ["image"],
-    ["code"],
-    ["scrollSync"],
-  ];
+  // console.log(props.contents);
 
   return (
     <>

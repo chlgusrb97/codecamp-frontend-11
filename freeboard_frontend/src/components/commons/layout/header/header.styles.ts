@@ -99,6 +99,7 @@ export const Ul = styled.ul`
   }
 `;
 
-export const UserName = styled.span`
+export const UserName = styled.a`
   font-size: 12px;
+  cursor: pointer;
 `;
