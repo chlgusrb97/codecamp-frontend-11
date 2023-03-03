@@ -31,6 +31,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
               <>
                 <li onClick={props.onClickSignIn}>로그인</li>
                 <li onClick={props.onClickSignUp}>회원가입</li>
+                <li onClick={props.onClickSignUp}>회원가입</li>
               </>
             )}
           </S.Right_Header>
@@ -50,6 +51,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
           </S.Ul>
         </S.Menu_Box>
       </S.Wrapper>
+      <></>
     </>
   );
 }

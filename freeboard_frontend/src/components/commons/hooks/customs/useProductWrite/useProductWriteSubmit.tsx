@@ -1,15 +1,27 @@
 import { useRouter } from "next/router";
+import { ChangeEvent, useState } from "react";
 import { ICreateUseditemInput } from "../../../../../commons/types/generated/types";
 import useMutationCreateUseditem from "../../mutations/useMutationCreateUseditem";
+import useMutationUploadFile from "../../mutations/useMutationUploadFile";
 
 export default function useProductWriteSubmit() {
   const router = useRouter();
 
+  const [imgUrl, setImgUrl] = useState("");
+  const [file, setFile] = useState<File>();
+
   const [crateUsedItem] = useMutationCreateUseditem();
+  const [uploadFile] = useMutationUploadFile();
 
   const onClickProductWriteSubmit = async (
     data: ICreateUseditemInput
   ): Promise<void> => {
+    // uploadFile
+    // const resultFile = await uploadFile({ variables: { file } });
+    // const url = resultFile.data?.uploadFile.url;
+    console.log(data.images);
+
+    // createUsedItem
     const result = await crateUsedItem({
       variables: {
         createUseditemInput: {
@@ -26,9 +38,11 @@ export default function useProductWriteSubmit() {
         },
       },
     });
-    router.push(
-      `/main/products/products-post-moved/${result.data?.createUseditem._id}`
-    );
+    console.log(result.data?.createUseditem.images);
+    // router.push(
+    //   `/main/products/products-post-moved/${result.data?.createUseditem._id}`
+    // );
   };
+
   return { onClickProductWriteSubmit };
 }
