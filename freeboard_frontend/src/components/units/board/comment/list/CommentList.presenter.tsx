@@ -11,7 +11,7 @@ export default function CommentListUI(props: ICommentListUIProps) {
       pageStart={0}
       loadMore={props.onLoadMore}
       hasMore={true}
-      // useWindow={false}
+      useWindow={true}
     >
       <S.CommentContainer>
         <S.CommentWrapper>

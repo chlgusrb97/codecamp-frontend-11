@@ -9,26 +9,22 @@ import { FETCH_USER_LOGGED_IN, LOGOUT_USER } from "./header.queries";
 export default function LayoutHeaderContainer() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [show, setShow] = useState(false);
 
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
 
   const [logoutUser] = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const toggleSide = (toggled: boolean) => {
     setIsOpen(toggled);
   };
   const onClickSignIn = (): void => {
-    void router.push("/main/signIn");
+    void router.push("/main/login");
   };
 
   const onClickSignUp = (): void => {
-    void router.push("/main/signUp");
+    void router.push("/main/join");
   };
 
   const onClickLogoutUser = async () => {
@@ -36,6 +32,10 @@ export default function LayoutHeaderContainer() {
     Modal.success({ content: "로그아웃 되었습니다." });
 
     window.location.reload();
+  };
+
+  const onClickPaymentModal = () => {
+    setShow(true);
   };
 
   return (
@@ -47,7 +47,9 @@ export default function LayoutHeaderContainer() {
       onClickSignUp={onClickSignUp}
       onClickLogoutUser={onClickLogoutUser}
       data={data}
-      mounted={mounted}
+      show={show}
+      setShow={setShow}
+      onClickPaymentModal={onClickPaymentModal}
     />
   );
 }

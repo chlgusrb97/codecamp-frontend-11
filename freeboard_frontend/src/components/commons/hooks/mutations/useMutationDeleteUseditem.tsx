@@ -27,7 +27,7 @@ export default function useMutationDeleteUseditem() {
       },
     });
     Modal.success({ content: "상품이 삭제되었습니다." });
-    router.push("/main/products");
+    router.push("/main");
   };
 
   return { onClickDeleteUseditem };

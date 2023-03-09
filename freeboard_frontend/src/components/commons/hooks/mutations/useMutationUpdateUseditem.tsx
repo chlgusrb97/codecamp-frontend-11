@@ -14,6 +14,7 @@ const UPDATE_USED_ITEM = gql`
       useditemId: $useditemId
     ) {
       _id
+      images
     }
   }
 `;

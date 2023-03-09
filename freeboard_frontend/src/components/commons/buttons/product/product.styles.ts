@@ -1,12 +1,19 @@
 import styled from "@emotion/styled";
 
+interface IProps {
+  isActive: boolean;
+}
+
 export const Button = styled.button`
-  padding: 20px 40px;
-  background-color: #f16767;
-  color: #fff;
-  font-family: Nanum-ExtraBold;
-  font-size: 16px;
-  z-index: 999;
+  width: 195px;
+  height: 77px;
+  line-height: 77px;
+  background-color: ${(props: IProps) =>
+    props.isActive ? "#ffe004" : "#000"};
+  color: ${(props: IProps) =>
+    props.isActive ? "#000" : "#fff"
+  };
+  font-family: NotoSans-Bold;
+  font-size: 20px;
   cursor: pointer;
-  margin-left: 20px;
 `;

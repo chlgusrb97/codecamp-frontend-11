@@ -1,5 +1,8 @@
-import ProductWriteUI from "../../../../src/components/units/product/write/product.write.index";
+import { useAuth } from "../../../../src/components/commons/hooks/useAuth";
+import ProductsWriteUI from "../../../../src/components/units/products/write/products.write.index";
 
 export default function ProductPost() {
-  return <ProductWriteUI isEdit={false} />;
+  useAuth();
+
+  return <ProductsWriteUI isEdit={false} />;
 }

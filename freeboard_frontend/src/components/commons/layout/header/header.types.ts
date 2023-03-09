@@ -6,10 +6,11 @@ export interface ILayoutHeaderUIProps {
   onClickSignUp: () => void;
   onClickLogoutUser: () => void;
   isOpen: boolean;
+  show: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setShow: Dispatch<SetStateAction<boolean>>;
   toggleSide: (toggled: boolean) => void;
   data?: Pick<IQuery, "fetchUserLoggedIn">;
-  mounted: boolean;
 }
 
 export interface IProps {

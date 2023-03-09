@@ -1,5 +1,8 @@
-import ProductDetailUI from "../../../../../src/components/units/product/detail/product.detail.index";
+import { useAuth } from "../../../../../src/components/commons/hooks/useAuth";
+import ProductsDetailUI from "../../../../../src/components/units/products/detail/products.detail.index";
 
 export default function ProductPostMoved() {
-  return <ProductDetailUI />;
+  useAuth();
+
+  return <ProductsDetailUI />;
 }

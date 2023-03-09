@@ -10,23 +10,23 @@ interface IToastEditor {
   editorRef: MutableRefObject<any>;
   onChangeEditor: (value: string) => void;
   contents: string;
+  placeholder: string;
+  defaultValue?: string;
 }
 
 export default function ToastEditor(props: IToastEditor) {
-  // console.log(props.contents);
-
   return (
     <>
       <Editor
-        // initialValue={props.contents}
         ref={props.editorRef}
         height="600px"
         autofocus={false}
         initialEditType="markdown"
         plugins={[colorSyntax]}
         language="ko-KR"
-        // toolbarItems={toolbarItems}
         onChange={props.onChangeEditor}
+        placeholder={props.placeholder}
+        initialValue={props.defaultValue ?? ""}
       />
     </>
   );
