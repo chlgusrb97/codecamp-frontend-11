@@ -19,7 +19,7 @@ export default function SignInUI() {
       <S.Header>
         <Link href="/main">
           <a>
-            <img src="/images/logo02.png" />
+            <img src="/img/logo02.png" />
           </a>
         </Link>
       </S.Header>
@@ -30,28 +30,29 @@ export default function SignInUI() {
             <h2>Login</h2>
           </S.Title_List>
           <S.Contents_List>
-          <li>
-            <ul>
-              <LoginInput
-                type="text"
-                placeholder="아이디"
-                register={register("email")}
-              />
-            </ul>
-            <S.Error_Message>{errors.email?.message}</S.Error_Message>
-          </li>
-          <li>
-            <ul>
-              <LoginInput
-                type="password"
-                placeholder="비밀번호"
-                register={register("password")}
-              />
-            </ul>
-            <S.Error_Message>{errors.password?.message}</S.Error_Message>
-          </li>
-          <LoginButton title="로그인" />
-            <li>아직 계정이 없으신가요?
+            <li>
+              <ul>
+                <LoginInput
+                  type="text"
+                  placeholder="아이디"
+                  register={register("email")}
+                />
+              </ul>
+              <S.Error_Message>{errors.email?.message}</S.Error_Message>
+            </li>
+            <li>
+              <ul>
+                <LoginInput
+                  type="password"
+                  placeholder="비밀번호"
+                  register={register("password")}
+                />
+              </ul>
+              <S.Error_Message>{errors.password?.message}</S.Error_Message>
+            </li>
+            <LoginButton title="로그인" />
+            <li>
+              아직 계정이 없으신가요?
               <Link href="/main/join">
                 <a>
                   <p>회원가입</p>

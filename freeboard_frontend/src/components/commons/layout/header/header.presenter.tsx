@@ -24,7 +24,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
                 <S.User>
                   {props.data?.fetchUserLoggedIn.name}님 포인트
                   <S.Point>
-                    {props.data?.fetchUserLoggedIn.userPoint?.amount} P
+                    {props.data?.fetchUserLoggedIn.userPoint?.amount ?? 0} P
                   </S.Point>
                 </S.User>
               </li>
@@ -66,13 +66,13 @@ export default function LayoutHeaderUI(props: ILayoutHeaderUIProps) {
         <S.Header_Section_02>
           <Link href="/main">
             <a>
-              <img src="/images/logo01.png" alt="로고" />
+              <img src="/img/logo01.png" alt="로고" />
             </a>
           </Link>
-          <Link href="/main/products-post">
+          <Link href="/main/products/products-post">
             <a>
               <div>
-                <img src="/images/dollar.png" />
+                <img src="/img/dollar.png" />
                 <span>판매하기</span>
               </div>
             </a>

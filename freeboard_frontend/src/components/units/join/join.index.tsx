@@ -19,7 +19,7 @@ export default function JoinUI() {
       <S.Header>
         <Link href="/main">
           <a>
-            <img src="/images/logo02.png" />
+            <img src="/img/logo02.png" />
           </a>
         </Link>
       </S.Header>
@@ -81,14 +81,15 @@ export default function JoinUI() {
                 </div>
                 <div>
                   <Link href="/main">
-                    <a>                      
+                    <a>
                       <JoinButton title="취소" isActive={false} />
                     </a>
                   </Link>
                 </div>
               </div>
             </li>
-            <li>이미 아이디가 있으신가요?
+            <li>
+              이미 아이디가 있으신가요?
               <Link href="/main/login">
                 <a>
                   <p>로그인</p>

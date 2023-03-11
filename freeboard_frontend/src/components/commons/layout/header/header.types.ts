@@ -5,6 +5,7 @@ export interface ILayoutHeaderUIProps {
   onClickSignIn: () => void;
   onClickSignUp: () => void;
   onClickLogoutUser: () => void;
+  onClickPaymentModal: () => void;
   isOpen: boolean;
   show: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;

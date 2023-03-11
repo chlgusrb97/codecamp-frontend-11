@@ -40,13 +40,10 @@ export default function ProductsDetailUI() {
                     href={`/main/products/products-post-moved/${router.query.productsId}/edit`}
                   >
                     <a>
-                      <img src="/images/edit.png" />
+                      <img src="/img/edit.png" />
                     </a>
                   </Link>
-                  <img
-                    src="/images/delete.png"
-                    onClick={onClickDeleteUseditem}
-                  />
+                  <img src="/img/delete.png" onClick={onClickDeleteUseditem} />
                 </li>
               </S.Name_Box>
               <S.Contents_Box>
@@ -67,7 +64,7 @@ export default function ProductsDetailUI() {
               </S.Contents_Box>
               <S.Button_Box>
                 <S.Pick_Button onClick={onClickToggledPick}>
-                  <img src="/images/whiteheart.png" />
+                  <img src="/img/whiteheart.png" />
                   <span>찜 0</span>
                 </S.Pick_Button>
                 <ProductsDetailButton
@@ -95,7 +92,7 @@ export default function ProductsDetailUI() {
               </S.Text_box>
               <S.Map_Box>
                 <li>
-                  <img src="/images/location.png" />
+                  <img src="/img/location.png" />
                   <span>거래지역</span>
                 </li>
                 <li></li>

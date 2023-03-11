@@ -1,7 +1,6 @@
 import { useQueryFetchitemQuestions } from "../queries/useQueryFetchitemQuestions";
 
 export default function useOnLoadMoreFetchUseditemQuestions() {
-
   const { data, fetchMore } = useQueryFetchitemQuestions();
 
   const onLoadMore = (): void => {
