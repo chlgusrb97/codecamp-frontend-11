@@ -13,7 +13,7 @@ export default function ProductsQuestionAnswerWriteUI(
 
   return (
     <>
-      {!isOpen ? (
+      {!isOpen && (
         <form
           onSubmit={handleSubmit(
             onClickCreateQuestionAnswer(setValue)(props.id)
@@ -25,8 +25,6 @@ export default function ProductsQuestionAnswerWriteUI(
           />
           <button style={{ height: "60px", cursor: "pointer" }}>등록</button>
         </form>
-      ) : (
-        <></>
       )}
     </>
   );
