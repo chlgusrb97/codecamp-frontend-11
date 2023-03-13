@@ -13,6 +13,8 @@ import ProductsButton from "../../../commons/buttons/product/product.index";
 import { v4 as uuidv4 } from "uuid";
 import { useQueryFetchUsedItem } from "../../../commons/hooks/queries/useQueryFetchUsedItem";
 import ImageUpload from "../../../commons/productsImageUpload/ImageUpload.container";
+import Modal from "antd/es/modal/Modal";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 const ToastEditor = dynamic(
   async () => await import("../../../commons/ToastEditor"),
@@ -137,9 +139,15 @@ export default function ProductsWriteUI(props: IProductWriteUIProps) {
                 </li>
                 <S.Address_Box>
                   <li>
+                    <Modal>
+                      <DaumPostcodeEmbed
+                        // onComplete={handleComplete}
+                        {...props}
+                      />
+                    </Modal>
                     <div>
                       <input type="text" disabled={true} />
-                      <button>우편번호 검색</button>
+                      <button type="button">우편번호 검색</button>
                     </div>
                     <div>
                       <ProductsWriteInput type="text" />

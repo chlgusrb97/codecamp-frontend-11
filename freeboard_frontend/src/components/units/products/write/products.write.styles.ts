@@ -6,17 +6,17 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 65px 0  84px;
+  margin: 65px 0 84px;
 `;
 
 export const Form = styled.form`
   width: 1372px;
-`
+`;
 export const Title_Text = styled.h2`
   font-size: 40px;
   font-family: NotoSans-Bold;
   margin-bottom: 42px;
-`
+`;
 
 export const Contents_Box = styled.ul`
   width: 100%;
@@ -28,7 +28,7 @@ export const Contents_Box = styled.ul`
     width: 100%;
     display: flex;
     flex-direction: column;
-    
+
     :not(:last-child) {
       margin-bottom: 39px;
     }
@@ -57,29 +57,29 @@ export const Contents_Box = styled.ul`
     > p {
       margin-top: 5px;
       margin-left: 217px;
-      color: tomato
-    } 
+      color: tomato;
+    }
   }
-`
+`;
 
 export const Input_Title = styled.span`
   width: 260px;
   font-size: 24px;
-`
+`;
 
 export const Location_Box = styled.ul`
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 36px;
-`
+`;
 
 export const Map_Box = styled.div`
   width: 384px;
   height: 252px;
   background-color: gray;
   margin-right: 26px;
-`
+`;
 
 export const Address_Box = styled.ul`
   width: 100%;
@@ -87,7 +87,7 @@ export const Address_Box = styled.ul`
   > li {
     display: flex;
     flex-direction: column;
-    
+
     > div {
       display: flex;
       flex-direction: row;
@@ -103,9 +103,9 @@ export const Address_Box = styled.ul`
         background-color: #fff;
         border: 1px solid #bdbdbd;
         margin-right: 16px;
-        
+
         ::placeholder {
-          color: #bdbdbd
+          color: #bdbdbd;
         }
       }
 
@@ -117,7 +117,7 @@ export const Address_Box = styled.ul`
       }
     }
   }
-`
+`;
 
 export const Img_Box = styled.ul`
   display: flex;
@@ -140,7 +140,7 @@ export const Img_Box = styled.ul`
       align-items: center;
     }
   }
-`
+`;
 
 export const Button_Box = styled.ul`
   display: flex;
@@ -150,20 +150,19 @@ export const Button_Box = styled.ul`
 
   > li {
     > button {
-
       :first-of-type {
         margin-right: 8px;
       }
-      
+
       :last-child {
         margin-left: 8px;
       }
     }
   }
-`
+`;
 
 export const DivideLine = styled.div`
   width: 100%;
   height: 3px;
-  background-color: #555; 
-`
+  background-color: #555;
+`;

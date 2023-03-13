@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useOnClickCreateQuestionAnswer from "../../../../commons/hooks/customs/useOnClickCreateQuestionAnswer";
 import useFormProductsDetailCommentAnswer from "../../../../commons/useForm/useFormProductsDetailCommentAnswer";
 import { IQuestionAnswerWriteUIProps } from "./questionAnswer.write.types";
